@@ -1,0 +1,131 @@
+\documentclass{llncs}
+\usepackage{makeidx}
+\usepackage{cite}
+% 
+
+\begin{document}
+\pagestyle{plain}
+
+\mainmatter
+
+\title{Title here}
+%
+\titlerunning{short title}  % abbreviated title (for running head)
+%
+% use \inst{1} to get numbered tags on authors to match affiliations
+\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1} \and P. Thomas Fletcher\inst{1} \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} }
+
+\institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
+Interdepartmental Program in Neuroscience
+\\ University of Utah, Salt Lake City, UT 84112, USA}
+
+\maketitle
+
+\begin{abstract}
+ This paper combines traditional learning methods with regularized multi-task learning  to account for the differences between site data while still assuming similarity between tasks.  The ABIDE dataset is used for this research where a third of the data are removed and used to select a variety of parameters which are then used within a leave-one-out SVM classifier for the remaining test subjects. \keywords{SVM classification, ABIDE, Autism, ASD, multi-task learning, multi-site data }
+\end{abstract}
+
+\section{Introduction}
+The last few years have seen an increase in multi-site imaging studies for diseases like Alzheimer's to spectrum disorders like Autism. The basis for these aggregate datasets is to accelerate knowledge of these diseases and disorders by providing larger sample sizes and making access to data readily available.  Analysis using these datasets, however, is not that straightforward due to differences across site scanners, protocols, populations and diagnosis techniques(?). This variability introduces extra parameters that must be accounted for when using the aggregate data, but a standard way to deal with this variability has not been established.  
+
+In addition to the reasons cited above, many sites do not have a large enough sample size to use learning algorithms on site specific data. 
+Meta-analysis, in which results across small studies are combined to extract patterns common in each, has previously been used to combine site-specific results, especially when the sample size is low.  However, meta-analysis is not free of subjectivity of data variability, thus this method of combined analysis is also faulty \cite{meta}.
+
+Several groups have used the ABIDE dataset for classification with different, non-meta-analytic approaches. Nielsen, et al. combines the ABIDE dataset with a whole-brain approach, using a leave-one-out classifier to compute a classification score for each left-out subject based on age, gender and handedness.  The correlations for each connection in turn were fit with a linear model, separating controls from ASDs, which was then adjusted by the difference between the subject's site mean for that connection and the overall mean.  This approach yielded a maximum overall accuracy of 60.0\% despite finding significant positive correlation between the classification score and several of the phenotypic behavioral measures \cite{Jared}. A different study used histogram of gradients and applied this to several multi-site imaging studies which was able to achieve 61.7\% accuracy on the ABIDE dataset and 62.6\% on the ADHD-200 dataset \cite{ghiassian}. While \cite{Jared} accounted for some of the site differences, both studies approached the differences in population, imaging parameters and ******** as noise, instead of extra data that can be used when classifying an aggregate data set.  
+This is the key principle in multi-task learning: differences between tasks can be accounted for while using a common mean to account for similarities between the different tasks.  We decided to use this approach within an SVM classifier for the ABIDE dataset. 
+
+
+
+
+multi site imaging studies, aggregating data across sites with the goal that large amounts of data will 
+*********** however   This has led to an increase over the last several years in online data consortia like the ADHD-200, the 1000 Functional Connectomes project and the Autism Brain Imaging Data Exchange(ABIDE) \cite{adhd}\cite{fcon}\cite{abide}.  These multi-site imaging studies have allowed researchers to take advantage of an increased sample size  ************8       Many researchers fail to take these differences as a****8, but rather as increased noise when treating with the drawback of increased noise due to scanner, protocol and population differences. 
+\section{Methods}
+The data is split evenly amongst individual sites into two sets; a third is used for training and the remaining two thirds for testing.   The training set is used to determine the linear age regression model, SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. 
+\subsection{Multi-Task Learning}
+Evgeniou and Pontil (2004) introduces a method of multi-task learning based on kernel based methods typically used for single task learning.  This method relies on minimizing regularization functions such as that for SVM to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is:\\
+\begin{equation}
+\frac{1}{2}w^2 + C F(\sum_{i=1}^t \epsilon_i)
+\end{equation}
+where $C$ is a constant and $F(\mu)$ is a "monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups. 
+
+For multi-task learning, the relationship between tasks must be described, which Evgeniou and Pontil approach using the hierarchical Bayes method. This assumes that each task function comes from a class of probability distributions ******more****.  The relationship is defined as:\\
+\begin{equation}
+ w_t = w_0 + v_t
+\end{equation}
+where $w_0$ is the mean of the data and each task has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes:\\
+\begin{equation}
+ C \sum_{t=1}^T \sum_{i=1}^m \epsilon_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2
+\end{equation}
+where $\lambda_1, \lambda_2$ are "positive regularization parameters" and $C$ is still a constant.  For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
+***how transform data, use kernel if needed*****
+
+
+\subsection{Feature Selection}
+\label{subsec:FS}
+Initially, each subject is described by a 34,716 dimensional feature vector.  Using all features with the multi-task learning method described above would yield a feature space of $(t+1)d$ dimensions, where $d$ is the dimension of the feature space and $t$ the number of tasks.  While SVM classification could handle such high dimensional data, run time is a concern as well as a decrease in accuracy when many irrelevant or redundant features are included \cite{featsel}.  Thus we introduce a feature selection hypothesis test to determine which features would be most useful in classification.  A linear model is fit to the training set one feature at a time based on age and group. If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This is used on each of the 34,716 features in turn and, for the training set, reduces the dimensionality from 34,716 to   *******.  When testing on all 17 tasks, this reduces the feature space dimensionality by a factor of ********* and the run time from ********PUT DIFF IN RUN TIME maybe just for non-task?********. 
+\section{Evaluation}
+\subsection{Data}
+The Autism Brain Imaging Data Exchange(ABIDE) database is an online consortium of resting-state functional-MRI data from 17 international sites, resulting in brain imaging data for 539 individuals with ASD and 573 typically developing(TD)  controls \cite{abide}. All ASD subjects were diagnosed by either the Autism Diagnosis Observation Schedule-General(ADOS-G) or the Autism Diagnostic Interview-Revised tests and removed from the study if other co-morbid disorders were present \cite{lordADOS} \cite{lordADIR} \cite{abide}.  Further inclusion details can be found at (put url? citation to... website? or the abide paper?)
+\subsubsection{Preprocessing}
+All data was preprocessed using the Functional Connectomes-1000 preprocessing scripts \cite{fcon}. This includes:
+\begin{enumerate}
+\item MRI Deoblique, reorient, skull strip
+\item f-MRI Reorient, motion correct, skull strip, smooth
+\item registration 
+\item Segmentation - csf, white matter
+\item extracting global signal, from csf and wm
+\item extract time series, Z-transform correlations
+\item spatial smoothing, register to atlas
+\item some sort of regression
+\end{enumerate}
+Twelve subjects were removed because of failure during the preprocessing.  Two Oregon subjects were missing the resting fMRI file and 10 UCLA subjects were missing the anatomical scan file which is required in step 1 of the preprocessing pipeline above. This resulted in 1100 subjects for analysis, 530 ASD and 570 TD controls. 
+\subsubsection{Data Extraction}
+From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and the other 263 regions, resulting in a 34,716 dimensional feature space for each subject. 
+***add in featsel, multiplication/interdependence of features??
+\subsection{Results}
+
+\section{Discussion and Conclusion}
+text here
+
+
+\bibliography{miccai}{}
+\bibliographystyle{plain}
+
+%\begin{thebibliography}{}
+%%
+%% NOTE TO SELF: ref sources not cited?? check. 
+%%
+%\bibitem{2clar:eke}
+%Clarke, F., Ekeland, I.:
+%Nonlinear oscillations and
+%boundary-value problems for Hamiltonian systems.
+%Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+%
+%\bibitem{Jeff}
+%
+%\bibitem{Jared}
+%
+%\bibitem{regMTL}
+%
+%\bibitem{ghiassian}
+%
+%\bibitem{wee}
+%
+%\bibitem{powers}
+%
+%\bibitem{abide}
+%
+%\bibitem{lordADOS}
+%
+%\bibitem{lordADIR}
+%
+%\bibitem{libsvm}
+%
+%
+
+
+%\end{thebibliography}
+
+
+
+\end{document}
