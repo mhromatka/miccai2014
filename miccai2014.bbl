@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{fcon}
+Bharat~B Biswal, Maarten Mennes, Xi-Nian Zuo, Suril Gohel, Clare Kelly, Steve~M
+  Smith, Christian~F Beckmann, Jonathan~S Adelstein, Randy~L Buckner, Stan
+  Colcombe, et~al.
+\newblock Toward discovery science of human brain function.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  107(10):4734--4739, 2010.
+
+\bibitem{adhd}
+ADHD-200 Consortium et~al.
+\newblock The adhd-200 consortium: a model to advance the translational
+  potential of neuroimaging in clinical neuroscience.
+\newblock {\em Frontiers in systems neuroscience}, 6, 2012.
+
+\bibitem{svm}
+Corinna Cortes and Vladimir Vapnik.
+\newblock Support-vector networks.
+\newblock {\em Machine learning}, 20(3):273--297, 1995.
+
+\bibitem{abide}
+A~Di~Martino, CG~Yan, Q~Li, E~Denio, FX~Castellanos, K~Alaerts, JS~Anderson,
+  M~Assaf, SY~Bookheimer, M~Dapretto, et~al.
+\newblock The autism brain imaging data exchange: towards a large-scale
+  evaluation of the intrinsic brain architecture in autism.
+\newblock {\em Molecular psychiatry}, 2013.
+
+\bibitem{meta}
+Hans~J Eysenck.
+\newblock Meta-analysis and its problems.
+\newblock {\em BMJ: British Medical Journal}, 309(6957):789, 1994.
+
+\bibitem{ghiassian}
+Sina Ghiassian, Russell Greiner, Ping Jin, and Matthew~RG Brown.
+\newblock Learning to classify psychiatric disorders based on fmr images:
+  Autism vs healthy and adhd vs healthy.
+
+\bibitem{featsel}
+Isabelle Guyon and Andr{\'e} Elisseeff.
+\newblock An introduction to variable and feature selection.
+\newblock {\em The Journal of Machine Learning Research}, 3:1157--1182, 2003.
+
+\bibitem{lordADOS}
+Catherine Lord, Susan Risi, Linda Lambrecht, Edwin~H Cook~Jr, Bennett~L
+  Leventhal, Pamela~C DiLavore, Andrew Pickles, and Michael Rutter.
+\newblock The autism diagnostic observation schedule—generic: A standard
+  measure of social and communication deficits associated with the spectrum of
+  autism.
+\newblock {\em Journal of autism and developmental disorders}, 30(3):205--223,
+  2000.
+
+\bibitem{lordADIR}
+Catherine Lord, Michael Rutter, and Ann Le~Couteur.
+\newblock Autism diagnostic interview-revised: a revised version of a
+  diagnostic interview for caregivers of individuals with possible pervasive
+  developmental disorders.
+\newblock {\em Journal of autism and developmental disorders}, 24(5):659--685,
+  1994.
+
+\bibitem{Jared}
+Jared~A Nielsen, Brandon~A Zielinski, P~Thomas Fletcher, Andrew~L Alexander,
+  Nicholas Lange, Erin~D Bigler, Janet~E Lainhart, and Jeffrey~S Anderson.
+\newblock Multisite functional connectivity mri classification of autism: Abide
+  results.
+\newblock {\em Frontiers in human neuroscience}, 7, 2013.
+
+\bibitem{Powers}
+Jonathan~D Power, Alexander~L Cohen, Steven~M Nelson, Gagan~S Wig, Kelly~Anne
+  Barnes, Jessica~A Church, Alecia~C Vogel, Timothy~O Laumann, Fran~M Miezin,
+  Bradley~L Schlaggar, et~al.
+\newblock Functional network organization of the human brain.
+\newblock {\em Neuron}, 72(4):665--678, 2011.
+
+\end{thebibliography}
