@@ -13,7 +13,7 @@
 \titlerunning{short title}  % abbreviated title (for running head)
 %
 % use \inst{1} to get numbered tags on authors to match affiliations
-\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1} \and P. Thomas Fletcher\inst{1} \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} }
+\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1}  \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} \and P. Thomas Fletcher\inst{1}}
 
 \institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
 Interdepartmental Program in Neuroscience
@@ -40,7 +40,8 @@ This is the key principle in multi-task learning: differences between tasks can 
 multi site imaging studies, aggregating data across sites with the goal that large amounts of data will 
 *********** however   This has led to an increase over the last several years in online data consortia like the ADHD-200, the 1000 Functional Connectomes project and the Autism Brain Imaging Data Exchange(ABIDE) \cite{adhd}\cite{fcon}\cite{abide}.  These multi-site imaging studies have allowed researchers to take advantage of an increased sample size  ************8       Many researchers fail to take these differences as a****8, but rather as increased noise when treating with the drawback of increased noise due to scanner, protocol and population differences. 
 \section{Methods}
-The data is split evenly amongst individual sites into two sets; a third is used for training and the remaining two thirds for testing.   The training set is used to determine the linear age regression model, SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. 
+The data is split evenly amongst individual sites into two sets; a third is used for training and the remaining two thirds for testing.   The training set is used to remove nuisance factors from the data (e.g. age), SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. It is important to note that all parameter selection and feature selection is done exclusively on the \textit{training} set, and the testing set is only used in the final classification to avoid inflation of results. 
+
 \subsection{Multi-Task Learning}
 Evgeniou and Pontil (2004) introduces a method of multi-task learning based on kernel based methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is:\\
 \begin{equation}
@@ -49,15 +50,15 @@ Evgeniou and Pontil (2004) introduces a method of multi-task learning based on k
 \end{equation}
 where $C$ is a constant and $F(\mu)$ is a "monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups. 
 
-For multi-task learning, the relationship between tasks must be described, which Evgeniou and Pontil approach using the hierarchical Bayes method. This assumes that each task function comes from a class of probability distributions ******more****.  The relationship is defined as:\\
+For multi-task learning, the relationship between $T$ tasks must be described, which Evgeniou and Pontil approach using the hierarchical Bayes method. This assumes that each task function comes from a class of probability distributions ******more****.  The relationship is defined as:\\
 \begin{equation}
 \label{eq:sim}
- w_t = w_0 + v_t
+ w_t = w_0 + v_t ,
 \end{equation}
-where $w_0$ is the mean of the data and each task has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes:\\
+where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes:\\
 \begin{equation}
 \label{eq:mtlsvm}
- C \sum_{t=1}^T \sum_{i=1}^m \xi_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2
+ C \sum_{t=1}^T \sum_{i=1}^m \xi_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2 ,
 \end{equation}
 where $\lambda_1, \lambda_2$ are "positive regularization parameters" and $C$ is still a constant.  For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
 
@@ -68,16 +69,18 @@ The dual of equation \ref{eq:mtlsvm} can be found by defining a set of functions
 \end{equation}
 where 
 \begin{equation}
-\phi((x,t)) = \big(\frac{x}{\sqrt{\mu}}, \underbrace{0,...,0}_{t-1}, x, \underbrace{0,...,0}_{T-t} \big)	\textbf{for  } \mu = \frac{T\lambda_2}{\lambda_1}
+\phi((x,t)) = \big(\frac{x}{\sqrt{\mu}}, \underbrace{0,...,0}_{t-1}, x, \underbrace{0,...,0}_{T-t} \big), \quad \textbf{for  } \mu = \frac{T\lambda_2}{\lambda_1} .
 \end{equation}
-As you can see in \ref{eq:mtldual}, this is the same dual problem as for a single task-SVM, with the data transformed by $\phi$ into the kernel space. 
+As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as for a single task-SVM, with the data transformed by $\phi((x,t))$ into the multi-task kernel space. 
 
 
 
 
 \subsection{Feature Selection}
 \label{subsec:FS}
-Initially, each subject is described by a 34,716 dimensional feature vector.  Using all features with the multi-task learning method described above would yield a feature space of $(t+1)d$ dimensions, where $d$ is the dimension of the feature space and $t$ the number of tasks.  While SVM classification could handle such high dimensional data, run time is a concern as well as a decrease in accuracy when many irrelevant or redundant features are included \cite{featsel}.  Thus we introduce a feature selection hypothesis test to determine which features would be most useful in classification.  A linear model is fit to the training set one feature at a time based on age and group. If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This is used on each of the 34,716 features in turn and, for the training set, reduces the dimensionality from 34,716 to   *******.  When testing on all 17 tasks, this reduces the feature space dimensionality by a factor of ********* and the run time from ********PUT DIFF IN RUN TIME maybe just for non-task?********. 
+Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks; the method described would yield a feature space of $(t+1)d$ dimensions, where $d$ is the dimension of the feature space and $t$ the number of tasks.  Thus feature selection can be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}. 
+
+A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.  
 \section{Evaluation}
 \subsection{Data}
 The Autism Brain Imaging Data Exchange(ABIDE) database is an online consortium of resting-state functional-MRI data from 17 international sites, resulting in brain imaging data for 539 individuals with ASD and 573 typically developing(TD)  controls \cite{abide}. All ASD subjects were diagnosed by either the Autism Diagnosis Observation Schedule-General(ADOS-G) or the Autism Diagnostic Interview-Revised tests and removed from the study if other co-morbid disorders were present \cite{lordADOS} \cite{lordADIR} \cite{abide}.  Further inclusion details can be found at (put url? citation to... website? or the abide paper?)
@@ -95,7 +98,7 @@ All data was preprocessed using the Functional Connectomes-1000 preprocessing sc
 \end{enumerate}
 Twelve subjects were removed because of failure during the preprocessing.  Two Oregon subjects were missing the resting fMRI file and 10 UCLA subjects were missing the anatomical scan file which is required in step 1 of the preprocessing pipeline above. This resulted in 1100 subjects for analysis, 530 ASD and 570 TD controls. 
 \subsubsection{Data Extraction}
-From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and the other 263 regions, resulting in a 34,716 dimensional feature space for each subject. 
+From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and the other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number is reduced to 312 features per subject.  
 ***add in featsel, multiplication/interdependence of features??
 \subsection{Results}
 
