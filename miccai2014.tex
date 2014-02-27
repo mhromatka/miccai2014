@@ -1,6 +1,7 @@
 \documentclass{llncs}
 \usepackage{makeidx}
 \usepackage{cite}
+\usepackage{graphicx}
 %
 
 \begin{document}
@@ -120,46 +121,18 @@ From each subject's postprocessed image, the time series for each of 264 regions
 \subsection{Results}
 
 \section{Discussion and Conclusion}
-text here
+\begin{figure}
+	\centering
+	\includegraphics[scale = .3]{now_circos.png}
+	\caption{The pairwise connections, represented as ribbons connecting each region, selected by the hypothesis test described in \ref{subsec:FS}.  The width of each ribbon is determined by the weights from the $w_0$ vector in the SVM. }
+	\label{fig:circos}
+\end{figure}
 
 
 \bibliography{miccai}{}
 \bibliographystyle{plain}
 
-%\begin{thebibliography}{}
-%%
-%% NOTE TO SELF: ref sources not cited?? check.
-%%
-%\bibitem{2clar:eke}
-%Clarke, F., Ekeland, I.:
-%Nonlinear oscillations and
-%boundary-value problems for Hamiltonian systems.
-%Arch. Rat. Mech. Anal. 78, 315--333 (1982)
-%
-%\bibitem{Jeff}
-%
-%\bibitem{Jared}
-%
-%\bibitem{regMTL}
-%
-%\bibitem{ghiassian}
-%
-%\bibitem{wee}
-%
-%\bibitem{powers}
-%
-%\bibitem{abide}
-%
-%\bibitem{lordADOS}
-%
-%\bibitem{lordADIR}
-%
-%\bibitem{libsvm}
-%
-%
 
-
-%\end{thebibliography}
 
 
 
