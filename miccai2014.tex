@@ -8,7 +8,7 @@
 
 \mainmatter
 
-\title{Accounting for Heterogeneity across Multiple Imaging Sites using Multi-Task
+\title{Accounting for Heterogeneity Across Multiple Imaging Sites Using Multi-Task
   Learning}
 %
 \titlerunning{short title}  % abbreviated title (for running head)
@@ -24,29 +24,46 @@ Interdepartmental Program in Neuroscience
 
 \begin{abstract}
 Combining imaging data from multiple sites has the potential to increase
-statistical power in clinical studies. However, the increase in sample size is
-accompanied by an increase in variance due to inconsistencies across sites,
-e.g., different scanners, protocols, and demographics. In this paper, we present
-an approach for combining multi-site imaging data in classification tasks that
-takes this heterogeneity into account. The idea is to treat the classification
-problem as a multi-task learning problem, where each imaging site is treated as
-a ``task''. We employ a regularized support vector machine (SVM) that allows for
-differences in decision boundaries at individual sites, while at the same time
-leveraging the similarities in the decision boundaries across sites. We
-demonstrate the effectiveness of this approach in the classification of autism
-from multi-site functional magnetic resonance imaging (fMRI) from the Autism
-Brain Imaging Data Exchange (ABIDE). The proposed method achieves
-state-of-the-art accuracy and outperforms a comparable SVM classifier applied to
-pooled data as well as individual SVM classifiers applied per site.
+statistical power in clinical studies. However, while pooling multiple data
+sources increases sample size, it also increases unwanted variance due to
+inconsistencies across sites, e.g., different scanners, protocols, and
+demographics. In this paper, we present an approach for combining multi-site
+imaging data in classification tasks that takes this heterogeneity into
+account. The idea is to treat the classification problem as a multi-task
+learning problem, where each imaging site is treated as a ``task''. We employ a
+regularized support vector machine (SVM) that allows for differences in decision
+boundaries at individual sites, while at the same time leveraging the
+similarities in the decision boundaries across sites. We demonstrate the
+effectiveness of this approach in the classification of autism from multi-site
+functional magnetic resonance imaging (fMRI) from the Autism Brain Imaging Data
+Exchange (ABIDE). The proposed method achieves state-of-the-art accuracy and
+outperforms a comparable SVM classifier applied to pooled data as well as
+individual SVM classifiers applied per site.
 
 % This paper combines traditional learning methods with regularized multi-task learning  to account for the differences between site data while still assuming similarity between tasks.  The ABIDE dataset is used for this research where a third of the data are removed and used to select a variety of parameters which are then used within a leave-one-out SVM classifier for the remaining test subjects. \keywords{SVM classification, ABIDE, Autism, ASD, multi-task learning, multi-site data }
 \end{abstract}
 
 \section{Introduction}
-The last few years have seen an increase in multi-site imaging studies for diseases like Alzheimer's to spectrum disorders like Autism. The basis for these aggregate datasets is to accelerate knowledge of these diseases and disorders by providing larger sample sizes and making access to data readily available.  Analysis using these datasets, however, is not that straightforward due to differences across site scanners, protocols, populations and diagnosis techniques(?). This variability introduces extra parameters that must be accounted for when using the aggregate data, but a standard way to deal with this variability has not been established.
+Recent years have seen a movement towards combining neuroimaging data collected
+across multiple sites. Such multi-site data has the potential to accelerate
+scientific discovery by increasing sample sizes, providing broader ranges of
+participant demographics, and making data publicly available. Different
+approaches include large, coordinated multi-site neuroimaging studies, such as
+the Alzheimer's Disease Neuroimaging Initiative (ADNI) \cite{adni}, as well as
+data sharing initiatives that combine multiple single-site studies, such as the
+Autism Brain Imaging Data Exchange (ABIDE) \cite{abide}. Analysis using these
+datasets, however, is not straightforward, due to differences across site
+scanners, protocols, populations, and diagnosis techniques. Treating a
+multi-site study as a single, homogeneous data set fails to account for this
+variability, which can be detrimental to the statistical power and counteract
+the gains made by increasing the sample size.
 
-In addition to the reasons cited above, many sites do not have a large enough sample size to use learning algorithms on site specific data.
-Meta-analysis, in which results across small studies are combined to extract patterns common in each, has previously been used to combine site-specific results, especially when the sample size is low.  However, meta-analysis is not free of subjectivity of data variability, thus this method of combined analysis is also faulty \cite{meta}.
+In addition, many sites do not have a large enough sample size to use learning
+algorithms on site-specific data.  Meta-analysis, in which results across small
+studies are combined to extract patterns common in each, has previously been
+used to combine site-specific results, especially when the sample size is low.
+However, meta-analysis is not free of subjectivity of data variability, thus
+this method of combined analysis is also faulty \cite{meta}.
 
 Several groups have used the ABIDE dataset for classification with different, non-meta-analytic approaches. Nielsen, et al. combines the ABIDE dataset with a whole-brain approach, using a leave-one-out classifier to compute a classification score for each left-out subject based on age, gender and handedness.  The correlations for each connection in turn were fit with a linear model, separating controls from ASDs, which was then adjusted by the difference between the subject's site mean for that connection and the overall mean.  This approach yielded a maximum overall accuracy of 60.0\% despite finding significant positive correlation between the classification score and several of the phenotypic behavioral measures \cite{Jared}. A different study used histogram of gradients and applied this to several multi-site imaging studies which was able to achieve 61.7\% accuracy on the ABIDE dataset and 62.6\% on the ADHD-200 dataset \cite{ghiassian}. While \cite{Jared} accounted for some of the site differences, both studies approached the differences in population, imaging parameters and ******** as noise, instead of extra data that can be used when classifying an aggregate data set.
 This is the key principle in multi-task learning: differences between tasks can be accounted for while using a common mean to account for similarities between the different tasks.  We decided to use this approach within an SVM classifier for the ABIDE dataset.
