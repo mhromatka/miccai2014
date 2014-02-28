@@ -3,11 +3,12 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: miccai2014.aux
 The style file: plain.bst
 Database file #1: miccai.bib
+Warning--I didn't find a database entry for "adni"
 Warning--empty journal in ghiassian
 Warning--empty year in ghiassian
 You've used 10 entries,
             2118 wiz_defined-function locations,
-            570 strings with 6464 characters,
+            571 strings with 6468 characters,
 and the built_in function-call counts, 4317 in all, are:
 = -- 389
 > -- 334
@@ -46,4 +47,4 @@ warning$ -- 2
 while$ -- 33
 width$ -- 12
 write$ -- 107
-(There were 2 warnings)
+(There were 3 warnings)
