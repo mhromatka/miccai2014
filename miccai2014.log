@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  26 FEB 2014 13:41
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  27 FEB 2014 20:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -178,21 +178,32 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ))
 \Gin@req@height=\dimen124
 \Gin@req@width=\dimen125
-) (./miccai2014.aux)
+)
+(/usr/share/texmf/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texmf/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks19
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+)) (./miccai2014.aux)
 \openout1 = `miccai2014.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 
 (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -201,12 +212,12 @@ LaTeX Font Info:    ... okay on input line 7.
 \scratchbox=\box54
 \nofMPsegments=\count118
 \nofMParguments=\count119
-\everyMPshowfont=\toks19
+\everyMPshowfont=\toks20
 \MPscratchCnt=\count120
 \MPscratchDim=\dimen127
 \MPnumerator=\count121
 \makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks20
+\everyMPtoPDFconversion=\toks21
 ) (/usr/share/texmf/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -255,65 +266,77 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 24.
- [1
+LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+
+LaTeX Warning: Citation `adni' on page 1 undefined on input line 55.
+
+[1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
 
  []
 
 [3] [4] <now_circos.png, id=29, 782.925pt x 782.925pt>
 File: now_circos.png Graphic file (type png)
  <use now_circos.png>
-Package pdftex.def Info: now_circos.png used on input line 126.
+Package pdftex.def Info: now_circos.png used on input line 145.
 (pdftex.def)             Requested size: 234.8793pt x 234.8793pt.
 
 (./miccai2014.bbl [5 <./now_circos.png>]
 Missing character: There is no â in font cmr9!
 Missing character: There is no € in font cmr9!
 Missing character: There is no ” in font cmr9!
-) [6] (./miccai2014.aux) ) 
+) [6] (./miccai2014.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2017 strings out of 493607
- 26819 string characters out of 3149945
- 91687 words of memory out of 3500000
- 5313 multiletter control sequences out of 15000+200000
- 7980 words of font info for 28 fonts, out of 3000000 for 9000
+ 2311 strings out of 493607
+ 29904 string characters out of 3149945
+ 93155 words of memory out of 3500000
+ 5587 multiletter control sequences out of 15000+200000
+ 10612 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 37i,8n,23p,1226b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx
-10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texmf/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share
-/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/p
-ublic/amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/t
-exmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/publ
-ic/amsfonts/cm/cmr9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
-mf/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/publ
-ic/amsfonts/cm/cmti9.pfb>
-Output written on miccai2014.pdf (6 pages, 639815 bytes).
+ 37i,8n,24p,1201b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf
+/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/public
+/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmex10.
+pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
+mf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi9.
+pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texm
+f/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public/
+amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/f
+onts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/am
+sfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm1
+0.pfb>
+Output written on miccai2014.pdf (6 pages, 633686 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
