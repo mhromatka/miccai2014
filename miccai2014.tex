@@ -17,11 +17,11 @@
 \titlerunning{short title}  % abbreviated title (for running head)
 %
 % use \inst{1} to get numbered tags on authors to match affiliations
-%\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1}  \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} \and P. Thomas Fletcher\inst{1}}
+\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1}  \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} \and P. Thomas Fletcher\inst{1}}
 
-%\institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
-%Interdepartmental Program in Neuroscience
-%\\ University of Utah, Salt Lake City, UT 84112, USA}
+\institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
+Interdepartmental Program in Neuroscience
+\\ University of Utah, Salt Lake City, UT 84112, USA}
 
 \maketitle
 
@@ -106,6 +106,9 @@ differences across imaging sites as noise instead of extra data that can be
 leveraged when classifying an aggregate data set.
 
 % Many researchers fail to take these differences as a****8, but rather as increased noise when treating with the drawback of increased noise due to scanner, protocol and population differences.}
+  
+%Previous efforts to combine single-site studies have relied primarily on meta-analysis, in which results across small sites are statistically combined to extract patterns common across the combined sample size. Meta-analysis, however, is not free of subjectivity of data variability, thus this method of combined analysis is also faulty \cite{meta}.
+
 \section{Methods}
 Classification of multi-site imaging data can be thought of as a multi-task learning problem where each site,  $s$, is treated as a separate task, $t$.  For a dataset with $S$ sites, the corresponding multi-task problem will have a set of $T = S$ tasks and a function $F(t)$ that describes the relationship between each task.
 Prior to using any sort of machine learning, however, nuisance factors (e.g. age) should be ***removed? from the data to ideally isolate differences across all data that are exclusive to the ***disease, disorder?**** being studied.
@@ -113,27 +116,24 @@ Prior to using any sort of machine learning, however, nuisance factors (e.g. age
 % SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. It is important to note that all parameter tuning and feature selection is done exclusively on the \textit{training} set, and the testing set is only used in the final classification to avoid inflation of results.
 
 \subsection{Multi-Task Learning}
-Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning based on kernel methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is
+Evgeniou and Pontil (2004) introduces a method of multi-task learning based on kernel based methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is:\\
 \begin{equation}
 \label{eq:svm}
-\frac{1}{2}w^2 + C F\left(\sum_{i=1}^t \xi_i\right),
+\frac{1}{2}w^2 + C F(\sum_{i=1}^t \xi_i)
 \end{equation}
-where $C$ is a constant and $F(\mu)$ is a monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
+where $C$ is a constant and $F(\mu)$ is a "monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
 
-For multi-task learning, the relationship between $T$ tasks must be described,
-which can be framed as a hierarchical model. This assumes that each task
-function comes from a class of probability distributions.  The relationship is
-defined as
+For multi-task learning, the relationship between $T$ tasks must be described, which Evgeniou and Pontil approach using the hierarchical Bayes method. This assumes that each task function comes from a class of probability distributions.  The relationship is defined as:\\
 \begin{equation}
 \label{eq:sim}
  w_t = w_0 + v_t ,
 \end{equation}
-where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes
+where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes:\\
 \begin{equation}
 \label{eq:mtlsvm}
  C \sum_{t=1}^T \sum_{i=1}^m \xi_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2 ,
 \end{equation}
-where $\lambda_1, \lambda_2$ are positive regularization parameters, and $C$ is still a constant. For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
+where $\lambda_1, \lambda_2$ are "positive regularization parameters" and $C$ is still a constant.  For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
 
 The dual of equation \ref{eq:mtlsvm} can be found by defining a set of functions $f_t(x) = w_t \cdot x$ which can be simplified to $F(x,t) = f_t(x)$.  This can be described by a kernel function $\phi((x,t))$ which allows us to relate the dual of a multi-task learning problem to the dual of Equation \ref{eq:svm}.
 \begin{equation}
@@ -154,7 +154,7 @@ As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as fo
 Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks. For a feature space $x \in \mathbb{R}^d$, the multi-task kernel $\phi((x,t))$ would yield a feature space of $d(t+1)$ dimensions.  Feature selection can and should be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}.
 
 
-One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, so the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups.  This approach requires choosing a user defined $n$ size subset of features which introduces another parameter and layer of complexity but overall reduces computation time by dramatically reducing the dimensionality of the feature space.
+One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, so the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups.  This approach requires choosing a user defined $n$ size subset of features which introduces another parameter and layer of complexity but overall reduces computation time by dramatically reducing the dimensionality of the feature space. 
 %A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.
 \section{Evaluation}
 \subsection{Data}
