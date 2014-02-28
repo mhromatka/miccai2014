@@ -13,12 +13,23 @@ Corinna Cortes and Vladimir Vapnik.
 \newblock Support-vector networks.
 \newblock {\em Machine learning}, 20(3):273--297, 1995.
 
+\bibitem{DerSimonian}
+Rebecca DerSimonian and Nan Laird.
+\newblock Meta-analysis in clinical trials.
+\newblock {\em Controlled clinical trials}, 7(3):177--188, 1986.
+
 \bibitem{abide}
 A~Di~Martino, CG~Yan, Q~Li, E~Denio, FX~Castellanos, K~Alaerts, JS~Anderson,
   M~Assaf, SY~Bookheimer, M~Dapretto, et~al.
 \newblock The autism brain imaging data exchange: towards a large-scale
   evaluation of the intrinsic brain architecture in autism.
 \newblock {\em Molecular psychiatry}, 2013.
+
+\bibitem{regMTL}
+Theodoros Evgeniou and Massimiliano Pontil.
+\newblock Regularized multi--task learning.
+\newblock In {\em Proceedings of the tenth ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 109--117. ACM, 2004.
 
 \bibitem{meta}
 Hans~J Eysenck.

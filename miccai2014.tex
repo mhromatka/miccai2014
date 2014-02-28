@@ -17,11 +17,12 @@
 \titlerunning{short title}  % abbreviated title (for running head)
 %
 % use \inst{1} to get numbered tags on authors to match affiliations
-\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1}  \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} \and P. Thomas Fletcher\inst{1}}
-
-\institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
-Interdepartmental Program in Neuroscience
-\\ University of Utah, Salt Lake City, UT 84112, USA}
+\author{No Author Given}
+%\author{Michelle T. Hromatka\inst{1} \and Wei Liu\inst{1}  \and Jeffrey S. Anderson\inst{2} \and Brandon A. Zielinski\inst{3} \and Molly B. DuBray\inst{4} \and P. Thomas Fletcher\inst{1}}
+\institute{No Institute given}
+%\institute{School of Computing\and Division of Neuroradiology \and Division of Child Neurology\and
+%Interdepartmental Program in Neuroscience
+%\\ University of Utah, Salt Lake City, UT 84112, USA}
 
 \maketitle
 
@@ -69,10 +70,9 @@ combine statistical tests of low-dimensional summary measures, it is less
 applicable to learning problems on high-dimensional data such as images. For
 instance, applying independent classifiers at each site and then combining them
 post-hoc misses the opportunity that the classifiers could benefit from sharing
-information across sites during learning.
-% Not sure I follow this next point...
-Also, meta-analysis is not free of subjectivity of data variability, thus this
-method of combined analysis is also faulty \cite{meta}.
+information across sites during learning.  Meta-analysis is also prone to publication bias, meaning only results from 
+studies whose results were significant enough to publish are aggregated.  By using shared raw data instead of widely 
+published results, this bias can ideally be avoided \cite{meta}. 
 
 In this paper, we propose an approach for combining multiple imaging studies in
 classification problems. The idea is to treat the problem as a multi-task
@@ -93,7 +93,7 @@ homogeneous dataset during classification. Nielsen, et al.~\cite{Jared} combines
 the ABIDE dataset with a whole-brain approach, using a leave-one-out classifier
 to compute a classification score for each left-out subject based on age, gender
 and handedness. The correlations for each connection in turn were fit with a
-linear model, separating controls from ASDs, which was then adjusted by the
+linear model, separating controls from subjects with an Autism Spectrum Disorder (ASD), which was then adjusted by the
 difference between the subject's site mean for that connection and the overall
 mean. This approach yielded a maximum overall accuracy of 60.0\% despite finding
 significant positive correlation between the classification score and several of
@@ -116,24 +116,24 @@ Prior to using any sort of machine learning, however, nuisance factors (e.g. age
 % SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. It is important to note that all parameter tuning and feature selection is done exclusively on the \textit{training} set, and the testing set is only used in the final classification to avoid inflation of results.
 
 \subsection{Multi-Task Learning}
-Evgeniou and Pontil (2004) introduces a method of multi-task learning based on kernel based methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is:\\
+Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning based on kernel methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is
 \begin{equation}
 \label{eq:svm}
-\frac{1}{2}w^2 + C F(\sum_{i=1}^t \xi_i)
+\frac{1}{2}w^2 + C F\left(\sum_{i=1}^t \xi_i\right),
 \end{equation}
-where $C$ is a constant and $F(\mu)$ is a "monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
+where $C$ is a constant and $F(\mu)$ is a monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
 
-For multi-task learning, the relationship between $T$ tasks must be described, which Evgeniou and Pontil approach using the hierarchical Bayes method. This assumes that each task function comes from a class of probability distributions.  The relationship is defined as:\\
+For multi-task learning, the relationship between $T$ tasks must be described, which can be framed as a hierarchical model. This assumes that each task function comes from a class of probability distributions.  The relationship is defined as\\
 \begin{equation}
 \label{eq:sim}
  w_t = w_0 + v_t ,
 \end{equation}
-where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes:\\
+where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes\\
 \begin{equation}
 \label{eq:mtlsvm}
  C \sum_{t=1}^T \sum_{i=1}^m \xi_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2 ,
 \end{equation}
-where $\lambda_1, \lambda_2$ are "positive regularization parameters" and $C$ is still a constant.  For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
+where $\lambda_1, \lambda_2$ are positive regularization parameters, and $C$ is still a constant. For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
 
 The dual of equation \ref{eq:mtlsvm} can be found by defining a set of functions $f_t(x) = w_t \cdot x$ which can be simplified to $F(x,t) = f_t(x)$.  This can be described by a kernel function $\phi((x,t))$ which allows us to relate the dual of a multi-task learning problem to the dual of Equation \ref{eq:svm}.
 \begin{equation}
@@ -154,7 +154,7 @@ As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as fo
 Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks. For a feature space $x \in \mathbb{R}^d$, the multi-task kernel $\phi((x,t))$ would yield a feature space of $d(t+1)$ dimensions.  Feature selection can and should be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}.
 
 
-One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, so the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups.  This approach requires choosing a user defined $n$ size subset of features which introduces another parameter and layer of complexity but overall reduces computation time by dramatically reducing the dimensionality of the feature space. 
+One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, so the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups.  This approach requires choosing a user defined $n$ size subset of features which introduces another parameter and layer of complexity but overall reduces computation time by dramatically reducing the dimensionality of the feature space.
 %A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.
 \section{Evaluation}
 \subsection{Data}
@@ -176,7 +176,9 @@ Twelve subjects were removed because of failure during the preprocessing.  Two O
 From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and the other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number is reduced to 312 features per subject.
 ***add in featsel, multiplication/interdependence of features??
 \subsection{Results}
+The ABIDE data was split into two sets; one third of the data was used for training, the other two thirds was used exclusively to test our approach.  This divide was first done on a site by site basis to keep the ratio between sites approximately equal, in addition to preserving the ratio between ASD and TD.
 
+For all of the results presented within, the nuisance factor regression, feature, and parameter selection were performed on the testing set once, then these value were fixed across each experiment (individual site, all single task, multi-task).  For multi-task learning, the results are presented with the fixed error term coefficient as determined in the single-task case, but with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each tasks individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}.
 \section{Discussion and Conclusion}
 \begin{figure}
 	\centering
@@ -184,6 +186,9 @@ From each subject's postprocessed image, the time series for each of 264 regions
 	\caption{The pairwise connections, represented as ribbons connecting each region, selected by the hypothesis test described in \ref{subsec:FS}.  The width of each ribbon is determined by the weights from the $w_0$ vector in the SVM. }
 	\label{fig:circos}
 \end{figure}
+
+Figure \ref{fig:circos} displays the pairwise connections identified via the method described \ref{subsec:FS}.  The regions show a strong overlap with ROIs previously identified as network “hubs” thought to be abnormal in autism, namely the default mode network and socioemotional salience network.  Atypical network structure and function, identified in structural covariance MRI \cite{zielinski2012scmri} and also functional connectivity studies (reviewed in \cite{jeff2014}), may contribute to many of the behaviors associated with the disorder.
+
 
 
 \bibliography{miccai}{}
