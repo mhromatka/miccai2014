@@ -52,11 +52,7 @@ across multiple sites. Such multi-site data has the potential to accelerate
 scientific discovery by increasing sample sizes, providing broader ranges of
 participant demographics, and making data publicly available. Different
 approaches include large, coordinated multi-site neuroimaging studies, such as
-<<<<<<< HEAD
 the Alzheimer's Disease Neuroimaging Initiative (ADNI) \cite{adni} as well as
-=======
-the Alzheimer's Disease Neuroimaging Initiative (ADNI) \cite{adni}, as well as
->>>>>>> 51efaa3f7180534fa3db4b33a1be4c78a6ac6e0b
 data sharing initiatives that combine multiple single-site studies, such as the
 Autism Brain Imaging Data Exchange (ABIDE) \cite{abide}. Analysis using these
 datasets, however, is not straightforward, due to differences across site
@@ -72,17 +68,10 @@ used to combine site-specific results, especially when the sample size is low.
 However, meta-analysis is not free of subjectivity of data variability, thus
 this method of combined analysis is also faulty \cite{meta}.
 
-<<<<<<< HEAD
 Several groups have used the ABIDE dataset for classification with different, non-meta-analytic approaches. Nielsen, et al. combines the ABIDE dataset with a whole-brain approach, using a leave-one-out classifier to compute a classification score for each left-out subject based on age, gender and handedness.  The correlations for each connection in turn were fit with a linear model, separating controls from ASDs, which was then adjusted by the difference between the subject's site mean for that connection and the overall mean.  This approach yielded a maximum overall accuracy of 60.0\% despite finding significant positive correlation between the classification score and several of the phenotypic behavioral measures \cite{Jared}. A different study used histogram of gradients and applied this to several multi-site imaging studies which was able to achieve 61.7\% accuracy on the ABIDE dataset and 62.6\% on the ADHD-200 dataset \cite{ghiassian}. While \cite{Jared} accounted for some of the site differences, both studies approached the differences across imaging sites as noise instead of extra data that can be leveraged when classifying an aggregate data set.
 This is the key principle in multi-task learning: heterogeneity across similar tasks can be accounted for while using a common mean to account for similarities between the different tasks.  This approach will be applied within an SVM classifier on the ABIDE dataset.
 
 % Many researchers fail to take these differences as a****8, but rather as increased noise when treating with the drawback of increased noise due to scanner, protocol and population differences.}
-=======
-Several groups have used the ABIDE dataset for classification with different, non-meta-analytic approaches. Nielsen, et al. combines the ABIDE dataset with a whole-brain approach, using a leave-one-out classifier to compute a classification score for each left-out subject based on age, gender and handedness.  The correlations for each connection in turn were fit with a linear model, separating controls from ASDs, which was then adjusted by the difference between the subject's site mean for that connection and the overall mean.  This approach yielded a maximum overall accuracy of 60.0\% despite finding significant positive correlation between the classification score and several of the phenotypic behavioral measures \cite{Jared}. A different study used histogram of gradients and applied this to several multi-site imaging studies which was able to achieve 61.7\% accuracy on the ABIDE dataset and 62.6\% on the ADHD-200 dataset \cite{ghiassian}. While \cite{Jared} accounted for some of the site differences, both studies approached the differences in population, imaging parameters and ******** as noise, instead of extra data that can be used when classifying an aggregate data set.
-This is the key principle in multi-task learning: differences between tasks can be accounted for while using a common mean to account for similarities between the different tasks.  We decided to use this approach within an SVM classifier for the ABIDE dataset.
-
-
->>>>>>> 51efaa3f7180534fa3db4b33a1be4c78a6ac6e0b
 
 \section{Methods}
 Classification of multi-site imaging data can be thought of as a multi-task learning problem where each site,  $s$, is treated as a separate task, $t$.  For a dataset with $S$ sites, the corresponding multi-task problem will have a set of $T = S$ tasks and a function $F(t)$ that describes the relationship between each task.
