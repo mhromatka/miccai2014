@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  28 FEB 2014 13:34
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  19 MAY 2014 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -283,19 +283,20 @@ LaTeX Warning: Citation `adni' on page 1 undefined on input line 56.
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--132
+Underfull \hbox (badness 10000) in paragraph at lines 131--133
 
  []
 
-[3] [4] <now_circos.png, id=28, 782.925pt x 782.925pt>
+[3] [4] [5] <now_circos.png, id=32, 782.925pt x 782.925pt>
 File: now_circos.png Graphic file (type png)
- <use now_circos.png>
-Package pdftex.def Info: now_circos.png used on input line 185.
+
+<use now_circos.png>
+Package pdftex.def Info: now_circos.png used on input line 200.
 (pdftex.def)             Requested size: 234.8793pt x 234.8793pt.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -303,31 +304,24 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-
-
-LaTeX Warning: Citation `zielinski2012scmri' on page 5 undefined on input line 
-190.
-
-
-LaTeX Warning: Citation `jeff2014' on page 5 undefined on input line 190.
-
-(./miccai2014.bbl [5] [6 <./now_circos.png>]
+ (./miccai2014.bbl [6 <./now_circos.png>]
 Missing character: There is no ‚ in font cmr9!
 Missing character: There is no Ä in font cmr9!
 Missing character: There is no î in font cmr9!
-) [7] (./miccai2014.aux)
+) [7]
+(./miccai2014.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2315 strings out of 493607
- 29955 string characters out of 3149945
- 93163 words of memory out of 3500000
- 5591 multiletter control sequences out of 15000+200000
+ 2316 strings out of 493607
+ 29967 string characters out of 3149945
+ 93181 words of memory out of 3500000
+ 5592 multiletter control sequences out of 15000+200000
  10612 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 37i,8n,24p,912b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,24p,812b,261s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/public
 /amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmex10.
@@ -341,7 +335,7 @@ amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb>
 ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/ams
 fonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmti9.pfb><
 /usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on miccai2014.pdf (7 pages, 644261 bytes).
+Output written on miccai2014.pdf (7 pages, 646556 bytes).
 PDF statistics:
  99 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream

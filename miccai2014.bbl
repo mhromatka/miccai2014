@@ -1,5 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{jeff2014}
+JeffreyS. Anderson.
+\newblock Cortical underconnectivity hypothesis in autism: Evidence from
+  functional connectivity mri.
+\newblock In Vinood~B. Patel, Victor~R. Preedy, and Colin~R. Martin, editors,
+  {\em Comprehensive Guide to Autism}, pages 1457--1471. Springer New York,
+  2014.
+
 \bibitem{fcon}
 Bharat~B Biswal, Maarten Mennes, Xi-Nian Zuo, Suril Gohel, Clare Kelly, Steve~M
   Smith, Christian~F Beckmann, Jonathan~S Adelstein, Randy~L Buckner, Stan
@@ -76,5 +84,12 @@ Jonathan~D Power, Alexander~L Cohen, Steven~M Nelson, Gagan~S Wig, Kelly~Anne
   Bradley~L Schlaggar, et~al.
 \newblock Functional network organization of the human brain.
 \newblock {\em Neuron}, 72(4):665--678, 2011.
+
+\bibitem{zielinski2012scmri}
+Brandon~A Zielinski, Jeffrey~S Anderson, Alyson~L Froehlich, Molly~BD Prigge,
+  Jared~A Nielsen, Jason~R Cooperrider, Annahir~N Cariello, P~Thomas Fletcher,
+  Andrew~L Alexander, Nicholas Lange, et~al.
+\newblock scmri reveals large-scale brain network abnormalities in autism.
+\newblock {\em PloS one}, 7(11):e49172, 2012.
 
 \end{thebibliography}

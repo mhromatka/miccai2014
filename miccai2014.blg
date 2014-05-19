@@ -4,49 +4,47 @@ The top-level auxiliary file: miccai2014.aux
 The style file: plain.bst
 Database file #1: miccai.bib
 Warning--I didn't find a database entry for "adni"
-Warning--I didn't find a database entry for "zielinski2012scmri"
-Warning--I didn't find a database entry for "jeff2014"
 Warning--empty journal in ghiassian
 Warning--empty year in ghiassian
-You've used 12 entries,
+You've used 14 entries,
             2118 wiz_defined-function locations,
-            588 strings with 6823 characters,
-and the built_in function-call counts, 5115 in all, are:
-= -- 476
-> -- 360
-< -- 1
-+ -- 145
-- -- 130
-* -- 439
-:= -- 893
-add.period$ -- 36
-call.type$ -- 12
-change.case$ -- 98
+            602 strings with 7395 characters,
+and the built_in function-call counts, 6215 in all, are:
+= -- 576
+> -- 436
+< -- 2
++ -- 174
+- -- 157
+* -- 529
+:= -- 1074
+add.period$ -- 43
+call.type$ -- 14
+change.case$ -- 115
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 141
-empty$ -- 308
-format.name$ -- 130
-if$ -- 998
+cite$ -- 16
+duplicate$ -- 178
+empty$ -- 379
+format.name$ -- 157
+if$ -- 1230
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 12
-newline$ -- 62
-num.names$ -- 24
-pop$ -- 87
+int.to.str$ -- 14
+missing$ -- 14
+newline$ -- 72
+num.names$ -- 30
+pop$ -- 105
 preamble$ -- 1
-purify$ -- 86
+purify$ -- 101
 quote$ -- 0
-skip$ -- 101
+skip$ -- 130
 stack$ -- 0
-substring$ -- 291
-swap$ -- 21
-text.length$ -- 1
+substring$ -- 355
+swap$ -- 34
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
+type$ -- 56
 warning$ -- 2
-while$ -- 42
-width$ -- 14
-write$ -- 130
-(There were 5 warnings)
+while$ -- 50
+width$ -- 16
+write$ -- 153
+(There were 3 warnings)
