@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  19 MAY 2014 15:30
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  29 MAY 2014 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -275,11 +275,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 27.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-
-LaTeX Warning: Citation `adni' on page 1 undefined on input line 56.
-
-[1
+) [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
@@ -292,11 +288,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--133
 
  []
 
-[3] [4] [5] <now_circos.png, id=32, 782.925pt x 782.925pt>
-File: now_circos.png Graphic file (type png)
+[3] [4] <acc_bar.png, id=28, 511.9125pt x 638.385pt>
+File: acc_bar.png Graphic file (type png)
+ <use acc_bar.png>
+Package pdftex.def Info: acc_bar.png used on input line 191.
+(pdftex.def)             Requested size: 307.14987pt x 383.03394pt.
 
-<use now_circos.png>
-Package pdftex.def Info: now_circos.png used on input line 200.
+<now_circos.png, id=29, 782.925pt x 782.925pt>
+File: now_circos.png Graphic file (type png)
+ <use now_circos.png>
+Package pdftex.def Info: now_circos.png used on input line 202.
 (pdftex.def)             Requested size: 234.8793pt x 234.8793pt.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -304,41 +305,49 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- (./miccai2014.bbl [6 <./now_circos.png>]
+ [5]
+[6 <./acc_bar.png (PNG copy)>] [7 <./now_circos.png>] (./miccai2014.bbl
+Underfull \hbox (badness 2012) in paragraph at lines 37--43
+[]\OT1/cmr/m/n/9 Christine Ecker, Vanessa Rocha-Rego, Patrick John-ston, Janain
+a Mourao-
+ []
+
 Missing character: There is no ‚ in font cmr9!
 Missing character: There is no Ä in font cmr9!
 Missing character: There is no î in font cmr9!
-) [7]
-(./miccai2014.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[8]
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ô in font cmr9!
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ô in font cmr9!
+) [9] (./miccai2014.aux) ) 
 Here is how much of TeX's memory you used:
- 2316 strings out of 493607
- 29967 string characters out of 3149945
- 93181 words of memory out of 3500000
- 5592 multiletter control sequences out of 15000+200000
+ 2324 strings out of 493607
+ 30080 string characters out of 3149945
+ 93201 words of memory out of 3500000
+ 5599 multiletter control sequences out of 15000+200000
  10612 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 37i,8n,24p,812b,261s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf
-/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/public
-/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmex10.
-pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
-mf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi9.
-pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texm
-f/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf/fonts/type1/public/
-amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmti9.pfb><
-/usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on miccai2014.pdf (7 pages, 646556 bytes).
+ 37i,8n,24p,967b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texmf/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share
+/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/p
+ublic/amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
+r10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/t
+exmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
+mf/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb>
+Output written on miccai2014.pdf (9 pages, 659950 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 102 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

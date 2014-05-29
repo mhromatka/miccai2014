@@ -78,7 +78,7 @@ In this paper, we propose an approach for combining multiple imaging studies in
 classification problems. The idea is to treat the problem as a multi-task
 learning problem, where classifiers for each site are estimated jointly, with a
 regularization that favors similarity across sites. This allows classifiers to
-share information during learning, but also provides the flexibility for them
+share information during learning, but also provides the flexibility for them to
 differ at each site as needed. This is the key principle in multi-task learning:
 heterogeneity across similar tasks (or, in our case, sites) can be accounted for
 while using a common mean to account for similarities between the different
@@ -155,7 +155,7 @@ As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as fo
 Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks. For a feature space $x \in \mathbb{R}^d$, the multi-task kernel $\phi((x,t))$ would yield a feature space of $d(t+1)$ dimensions.  Feature selection can and should be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}.
 
 
-One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, so the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in ***********, where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set each iteration. We modify SVM-RFE to rank by region, instead of by individual pairwise correlation, effectively reducing the data dimension for feature selection purposes while still leveraging the correlation data. 
+One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, meaning the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in \cite{guyon2002gene}, \cite{abide}, \cite{ecker2010} where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set each iteration. We modify SVM-RFE to rank by region, instead of by individual pairwise correlation, effectively reducing the data dimension for feature selection purposes while still leveraging the correlation data. 
 %A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.
 \section{Evaluation}
 \subsection{Data}
@@ -174,22 +174,24 @@ All data was preprocessed using the Functional Connectomes-1000 preprocessing sc
 \end{enumerate}
 Twelve subjects were removed because of failure during the preprocessing.  Two Oregon subjects were missing the resting fMRI file and 10 UCLA subjects were missing the anatomical scan file which is required in step 1 of the preprocessing pipeline above. This resulted in 1100 subjects for analysis, 530 ASD and 570 TD controls.
 \subsubsection{Data Extraction}
-From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and the other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number is reduced to 312 features per subject.
-***add in featsel, multiplication/interdependence of features??
+From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and all other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number was reduced to ****** regions of the original 264, yielding a final dimensionality of ***** features
 \subsection{Results}
-The ABIDE data was split into two sets; one third of the data was used for training, the other two thirds was used exclusively to test our approach.  This divide was first done on a site by site basis, evenly split between ASD and controls to preserve the ratios between tasks and groups across the two data sets.
+The ABIDE data was split into two sets; one half of the data was used for training, the other half was used exclusively to test our approach.  This divide was first done at the site level, a random division within ASD and controls, to preserve the ratios between sites and groups across the two data sets.
 
+We present results for three cases: one where each site was classified individually, a second where all site data was pooled and considered a single site and the third using the multi-task learning approach described in \ref{subsec:MTL}. For all of the results presented within, a radial basis function (RBF) kernel was used in the SVM, with parameters $C$ and $\gamma$ determined by cross validation on the training set. Multi-task learning requires an additional parameter, $\mu$, used to control similarity across tasks; this was also determined during cross validation. The training set was also used to determine nuisance factor regression on subject age, and feature selection for use on the testing set prior to the leave one out classifier.  ***All values determined by the training set were fixed across each experiment in order to test the difference between the classification cases, not the effectiveness of parameter tuning.
 
-
-We present results for three cases: one where each site was classified individually, a second where all sites were grouped and considered a single site and the third using the multi-task learning approach described in \ref{subsec:MTL}. For all of the results presented within, a radial basis function (RBF) kernel was used in the SVM, with parameters $C$ and $\gamma$ determined by cross validation on the training set.   The training set was also used to determine nuisance factor regression on subject age, and feature selection for use on the testing set prior to the leave one out classifier.  All values determined by the training set were fixed across each experiment in order to test the difference between the classification cases, not the effectiveness of parameter tuning.
-
-For multi-task learning, the results are presented with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each task's individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}. 
-
-This can be seen in figure ******, where a $mu$ value of ***** corresponds to single task learning and a $mu$ value of ****** corresponds to classifying each task individually.  The ******* indicate our results for single-task learning and the combined accuracy for individual task classification.
-
-The ideal value for $\mu$ appears to be at ********, where the accuracy reaches a peak of ********.
+% If don't have time for CV with mu
+%For multi-task learning, the results are presented with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each task's individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}. 
+%This can be seen in figure ******, where a $mu$ value of ***** corresponds to single task learning and a $mu$ value of ****** corresponds to classifying each task individually.  The ******* indicate our results for single-task learning and the combined accuracy for individual task classification.
+%The ideal value for $\mu$ appears to be at ********, where the accuracy reaches a peak of ********.
 
 The multi-task learning approach is significantly better than the single task approach, which is in turn much better than the individual task approach. A caveat is that the sensitivity and specificity values for single task learning seem to be more stable***?? than in the multi-task result. 
+\begin{figure}
+	\centering
+	\includegraphics[scale = .6]{acc_bar.png}
+	\caption{The overall accuracies by site, as found by each of the three experiments. }
+	\label{fig:acc_bar}
+\end{figure}
 
 
 Several datasets benefited greatly from the increase in data size, increasing **************.  For sites that were relatively stable to begin with because of sample size, the MTL approach did not find a large improvement to that sites overall accuracy.
@@ -202,7 +204,7 @@ Several datasets benefited greatly from the increase in data size, increasing **
 	\label{fig:circos}
 \end{figure}
 
-Figure \ref{fig:circos} displays the pairwise connections identified via the method described \ref{subsec:FS}.  The regions show a strong overlap with ROIs previously identified as network “hubs” thought to be abnormal in autism, namely the default mode network and socioemotional salience network.  Atypical network structure and function, identified in structural covariance MRI \cite{zielinski2012scmri} and also functional connectivity studies (reviewed in \cite{jeff2014}), may contribute to many of the behaviors associated with the disorder.
+Figure \ref{fig:circos} displays the regions identified via the method described \ref{subsec:FS}.  The regions show a strong overlap with ROIs previously identified as network “hubs” thought to be abnormal in autism, namely the default mode network and socioemotional salience network.  Atypical network structure and function, identified in structural covariance MRI \cite{zielinski2012scmri} and also functional connectivity studies (reviewed in \cite{jeff2014}), may contribute to many of the behaviors associated with the disorder.
 
 
 

@@ -35,13 +35,3 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-
-# Michelle's additions #
-########################
-*.aux
-*.bbl
-*.blg
-*.log
-*.synctex.gz
-
