@@ -122,7 +122,7 @@ Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning base
 \label{eq:svm}
 \frac{1}{2}w^2 + C F\left(\sum_{i=1}^t \xi_i\right),
 \end{equation}
-where $C$ is a constant and $F(\mu)$ is a monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
+where $C$ is a constant and $F$ is a monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
 
 For multi-task learning, the relationship between $T$ tasks must be described, which can be framed as a hierarchical model. This assumes that each task function comes from a class of probability distributions.  The relationship is defined as\\
 \begin{equation}
@@ -155,23 +155,25 @@ As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as fo
 Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks. For a feature space $x \in \mathbb{R}^d$, the multi-task kernel $\phi((x,t))$ would yield a feature space of $d(t+1)$ dimensions.  Feature selection can and should be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}.
 
 
-One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, meaning the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in \cite{guyon2002gene}, \cite{abide}, \cite{ecker2010} where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set each iteration. We modify SVM-RFE to rank by region, instead of by individual pairwise correlation, effectively reducing the data dimension for feature selection purposes while still leveraging the correlation data. 
+One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, meaning that the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in \cite{guyon2002gene}, \cite{abide}, \cite{ecker2010}: an iterative process where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set after each iteration. We modify SVM-RFE to better suit the f-MRI pairwise correlation data by ranking the features not by the associated $w$ value of each pairwise correlation, but by the $l2$-norm of an entire region's pairwise correlation $w$ vector values. This means for each region, $r$, we extract the $w$ values for all pairwise correlation datapoints involving region $r$ and find the $l2$-norm of these $w$ values. This is done for all regions in the dataset which are then ranked and a user-specifed number of regions corresponding to the lowest associated $l2$-norms are removed from the dataset after each iteration.   This approach effectively reduces the data dimension for feature selection purposes while still leveraging the correlation data.  
+%The iteration with the highest overall accuracy on the training set is used to determine which regions should be removed from both the training and testing sets in the classifier.
+
 %A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.
 \section{Evaluation}
 \subsection{Data}
 The Autism Brain Imaging Data Exchange(ABIDE) database is an online consortium of resting-state functional-MRI data from 17 international sites, resulting in brain imaging data for 539 individuals with ASD and 573 typically developing(TD)  controls \cite{abide}. All ASD subjects were diagnosed by either the Autism Diagnosis Observation Schedule-General(ADOS-G) or the Autism Diagnostic Interview-Revised tests and removed from the study if other co-morbid disorders were present \cite{lordADOS} \cite{lordADIR} \cite{abide}.  Further inclusion details can be found at (put url? citation to... website? or the abide paper?)
 \subsubsection{Preprocessing}
-All data was preprocessed using the Functional Connectomes-1000 preprocessing scripts \cite{fcon}. This includes:
-\begin{enumerate}
-\item MRI Deoblique, reorient, skull strip
-\item f-MRI Reorient, motion correct, skull strip, smooth
-\item registration
-\item Segmentation - csf, white matter
-\item extracting global signal, from csf and wm
-\item extract time series, Z-transform correlations
-\item spatial smoothing, register to atlas
-\item some sort of regression
-\end{enumerate}
+All data was preprocessed using the Functional Connectomes-1000 preprocessing scripts which includes skull stripping, motion correcting, registration, segmentation and spatial smoothing \cite{fcon}. 
+%\begin{enumerate}
+%\item MRI Deoblique, reorient, skull strip
+%\item f-MRI Reorient, motion correct, skull strip, smooth
+%\item registration
+%\item Segmentation - csf, white matter
+%\item extracting global signal, from csf and wm
+%\item extract time series, Z-transform correlations
+%\item spatial smoothing, register to atlas
+%\item some sort of regression
+%\end{enumerate}
 Twelve subjects were removed because of failure during the preprocessing.  Two Oregon subjects were missing the resting fMRI file and 10 UCLA subjects were missing the anatomical scan file which is required in step 1 of the preprocessing pipeline above. This resulted in 1100 subjects for analysis, 530 ASD and 570 TD controls.
 \subsubsection{Data Extraction}
 From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and all other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number was reduced to ****** regions of the original 264, yielding a final dimensionality of ***** features

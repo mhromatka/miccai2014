@@ -4,25 +4,22 @@
 JeffreyS. Anderson.
 \newblock Cortical underconnectivity hypothesis in autism: Evidence from
   functional connectivity mri.
-\newblock In Vinood~B. Patel, Victor~R. Preedy, and Colin~R. Martin, editors,
-  {\em Comprehensive Guide to Autism}, pages 1457--1471. Springer New York,
-  2014.
+\newblock In V~B Patel, V~R Preedy, and C~R Martin, editors, {\em Comprehensive
+  Guide to Autism}, pages 1457--1471. Springer New York, 2014.
 
 \bibitem{fcon}
-Bharat~B Biswal, Maarten Mennes, Xi-Nian Zuo, Suril Gohel, Clare Kelly, Steve~M
-  Smith, Christian~F Beckmann, Jonathan~S Adelstein, Randy~L Buckner, Stan
-  Colcombe, et~al.
+B~B Biswal, M~Mennes, X-N Zuo, S~Gohel, C~Kelly, S~M Smith, C~F Beckmann, J~S
+  Adelstein, R~L Buckner, S~Colcombe, et~al.
 \newblock Toward discovery science of human brain function.
-\newblock {\em Proceedings of the National Academy of Sciences},
-  107(10):4734--4739, 2010.
+\newblock {\em PNAS}, 107(10):4734--4739, 2010.
 
 \bibitem{svm}
-Corinna Cortes and Vladimir Vapnik.
+C~Cortes and V~Vapnik.
 \newblock Support-vector networks.
 \newblock {\em Machine learning}, 20(3):273--297, 1995.
 
 \bibitem{DerSimonian}
-Rebecca DerSimonian and Nan Laird.
+R~DerSimonian and N~Laird.
 \newblock Meta-analysis in clinical trials.
 \newblock {\em Controlled clinical trials}, 7(3):177--188, 1986.
 
@@ -34,51 +31,49 @@ A~Di~Martino, CG~Yan, Q~Li, E~Denio, FX~Castellanos, K~Alaerts, JS~Anderson,
 \newblock {\em Molecular psychiatry}, 2013.
 
 \bibitem{ecker2010}
-Christine Ecker, Vanessa Rocha-Rego, Patrick Johnston, Janaina Mourao-Miranda,
-  Andre Marquand, Eileen~M Daly, Michael~J Brammer, Clodagh Murphy, and
-  Declan~G Murphy.
+C~Ecker, V~Rocha-Rego, P~Johnston, J~Mourao-Miranda, A~Marquand, E~M Daly, M~J
+  Brammer, C~Murphy, and D~G Murphy.
 \newblock Investigating the predictive value of whole-brain structural mr scans
   in autism: a pattern classification approach.
 \newblock {\em Neuroimage}, 49(1):44--56, 2010.
 
 \bibitem{regMTL}
-Theodoros Evgeniou and Massimiliano Pontil.
+T~Evgeniou and M~Pontil.
 \newblock Regularized multi--task learning.
-\newblock In {\em Proceedings of the tenth ACM SIGKDD international conference
-  on Knowledge discovery and data mining}, pages 109--117. ACM, 2004.
+\newblock In {\em ACM SIGKDD international conference on Knowledge discovery
+  and data mining}, pages 109--117. ACM, 2004.
 
 \bibitem{meta}
-Hans~J Eysenck.
+H~J Eysenck.
 \newblock Meta-analysis and its problems.
 \newblock {\em BMJ: British Medical Journal}, 309(6957):789, 1994.
 
 \bibitem{ghiassian}
-Sina Ghiassian, Russell Greiner, Ping Jin, and Matthew~RG Brown.
+S~Ghiassian, R~Greiner, P~Jin, and M~RG Brown.
 \newblock Learning to classify psychiatric disorders based on fmr images:
   Autism vs healthy and adhd vs healthy.
 
 \bibitem{featsel}
-Isabelle Guyon and Andr{\'e} Elisseeff.
+I~Guyon and A~Elisseeff.
 \newblock An introduction to variable and feature selection.
-\newblock {\em The Journal of Machine Learning Research}, 3:1157--1182, 2003.
+\newblock {\em JMLR}, 3:1157--1182, 2003.
 
 \bibitem{guyon2002gene}
-Isabelle Guyon, Jason Weston, Stephen Barnhill, and Vladimir Vapnik.
+I~Guyon, J~Weston, S~Barnhill, and V~Vapnik.
 \newblock Gene selection for cancer classification using support vector
   machines.
 \newblock {\em Machine learning}, 46(1-3):389--422, 2002.
 
 \bibitem{lordADOS}
-Catherine Lord, Susan Risi, Linda Lambrecht, Edwin~H Cook~Jr, Bennett~L
-  Leventhal, Pamela~C DiLavore, Andrew Pickles, and Michael Rutter.
+C~Lord, S~Risi, L~Lambrecht, E~H Cook~Jr, B~L Leventhal, P~C DiLavore,
+  A~Pickles, and M~Rutter.
 \newblock The autism diagnostic observation schedule—generic: A standard
   measure of social and communication deficits associated with the spectrum of
   autism.
-\newblock {\em Journal of autism and developmental disorders}, 30(3):205--223,
-  2000.
+\newblock {\em J. of autism and developmental disorders}, 30(3):205--223, 2000.
 
 \bibitem{lordADIR}
-Catherine Lord, Michael Rutter, and Ann Le~Couteur.
+C~Lord, M~Rutter, and A~Le~Couteur.
 \newblock Autism diagnostic interview-revised: a revised version of a
   diagnostic interview for caregivers of individuals with possible pervasive
   developmental disorders.
@@ -86,30 +81,28 @@ Catherine Lord, Michael Rutter, and Ann Le~Couteur.
   1994.
 
 \bibitem{adni}
-Susanne~G Mueller, Michael~W Weiner, Leon~J Thal, Ronald~C Petersen, Clifford~R
-  Jack, William Jagust, John~Q Trojanowski, Arthur~W Toga, and Laurel Beckett.
+S~G Mueller, M~W Weiner, L~J Thal, R~C Petersen, C~R Jack, W~Jagust, J~Q
+  Trojanowski, A~W Toga, and L~Beckett.
 \newblock Ways toward an early diagnosis in alzheimer’s disease: The
   alzheimer’s disease neuroimaging initiative (adni).
 \newblock {\em Alzheimer's \& Dementia}, 1(1):55--66, 2005.
 
 \bibitem{Jared}
-Jared~A Nielsen, Brandon~A Zielinski, P~Thomas Fletcher, Andrew~L Alexander,
-  Nicholas Lange, Erin~D Bigler, Janet~E Lainhart, and Jeffrey~S Anderson.
+J~A Nielsen, B~A Zielinski, P~T Fletcher, A~L Alexander, N~Lange, Er~D Bigler,
+  J~E Lainhart, and J~S Anderson.
 \newblock Multisite functional connectivity mri classification of autism: Abide
   results.
 \newblock {\em Frontiers in human neuroscience}, 7, 2013.
 
 \bibitem{Powers}
-Jonathan~D Power, Alexander~L Cohen, Steven~M Nelson, Gagan~S Wig, Kelly~Anne
-  Barnes, Jessica~A Church, Alecia~C Vogel, Timothy~O Laumann, Fran~M Miezin,
-  Bradley~L Schlaggar, et~al.
+J~D Power, A~L Cohen, S~M Nelson, G~S Wig, K~A Barnes, J~A Church, A~C Vogel,
+  T~O Laumann, F~M Miezin, B~L Schlaggar, et~al.
 \newblock Functional network organization of the human brain.
 \newblock {\em Neuron}, 72(4):665--678, 2011.
 
 \bibitem{zielinski2012scmri}
-Brandon~A Zielinski, Jeffrey~S Anderson, Alyson~L Froehlich, Molly~BD Prigge,
-  Jared~A Nielsen, Jason~R Cooperrider, Annahir~N Cariello, P~Thomas Fletcher,
-  Andrew~L Alexander, Nicholas Lange, et~al.
+B~A Zielinski, J~S Anderson, A~L Froehlich, M~BD Prigge, J~A Nielsen, J~R
+  Cooperrider, A~N Cariello, P~T Fletcher, A~L Alexander, N~Lange, et~al.
 \newblock scmri reveals large-scale brain network abnormalities in autism.
 \newblock {\em PloS one}, 7(11):e49172, 2012.
 
