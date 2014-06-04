@@ -128,19 +128,18 @@ dimensionality of the data.
 Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning
 based on kernel methods typically used for single task learning.  This method
 relies on minimizing regularization functions, such as that for SVM, to capture
-both overall similarity between tasks and individual task differences. Given
+both overall similarity between tasks and individual task differences. Given $N$
 feature vectors $x_i \in \mathbb{R}^d$ with labels $y_i \in \{-1, 1\}$, the
 traditional minimization for a soft margin SVM~\cite{svm} is
 \begin{equation}
 \label{eq:svm}
-\arg \min_{w} \frac{1}{2}\|w\|^2 + C F\left(\sum_{i=1}^N \xi_i\right),
+\arg \min_{w} \frac{1}{2}\|w\|^2 + C \sum_{i=1}^N \xi_i,
 \quad\quad \text{subject to:}\,\,\, y_i (w \cdot x_i - b) \geq 1 - \xi_i,\,\xi_i
 \geq 0,
 \end{equation}
-where the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,
-which is the boundary between groups, $C \in \mathbb{R}$ is a constant, $\xi_i
-\in \mathbb{R}$ are slack variables, and $F$ is a monotonic convex function with
-$F(0)=0$.
+where the weight vector $w$ defines the hyperplane, $(w \cdot x +b)$,
+which is the boundary between groups, $C \in \mathbb{R}$ is a constant, and $\xi_i
+\in \mathbb{R}$ are slack variables.
 
 For multi-task learning, the relationship between $S$ tasks (or sites, in our
 case) must be described, which can be framed as a hierarchical model. This
