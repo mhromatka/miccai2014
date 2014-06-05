@@ -11,8 +11,7 @@
 
 \mainmatter
 
-\title{Accounting for Heterogeneity Across Multiple Imaging Sites Using Multi-Task
-  Learning}
+\title{Accounting for Heterogeneity Across Multiple Imaging Sites Using Multi-Task Learning}
 %
 \titlerunning{short title}  % abbreviated title (for running head)
 %
@@ -27,22 +26,7 @@
 \maketitle
 
 \begin{abstract}
-Combining imaging data from multiple sites has the potential to increase
-statistical power in clinical studies. However, while pooling multiple data
-sources increases sample size, it also increases unwanted variance due to
-inconsistencies across sites, e.g., different scanners, protocols, and
-demographics. In this paper, we present an approach for combining multi-site
-imaging data in classification tasks that takes this heterogeneity into
-account. The idea is to treat the classification problem as a multi-task
-learning problem, where each imaging site is treated as a ``task''. We employ a
-regularized support vector machine (SVM) that allows for differences in decision
-boundaries at individual sites, while at the same time leveraging the
-similarities in the decision boundaries across sites. We demonstrate the
-effectiveness of this approach in the classification of autism from multi-site
-functional magnetic resonance imaging (fMRI) from the Autism Brain Imaging Data
-Exchange (ABIDE). The proposed method achieves state-of-the-art accuracy and
-outperforms a comparable SVM classifier applied to pooled data as well as
-individual SVM classifiers applied per site.
+Combining imaging data from multiple sites has the potential to increase statistical power in clinical studies. However, while pooling multiple data sources increases sample size, it also increases unwanted variance due to inconsistencies across sites, e.g., different scanners, protocols, and demographics. In this paper, we present an approach for combining multi-site imaging data in classification tasks that takes this heterogeneity into account. The idea is to treat the classification problem as a multi-task learning problem, where each imaging site is treated as a ``task''. We employ a regularized support vector machine (SVM) that allows for differences in decision boundaries at individual sites, while at the same time leveraging the similarities in the decision boundaries across sites. We demonstrate the effectiveness of this approach in the classification of autism from multi-site functional magnetic resonance imaging (fMRI) from the Autism Brain Imaging Data Exchange (ABIDE). The proposed method achieves state-of-the-art accuracy and outperforms a comparable SVM classifier applied to pooled data as well as individual SVM classifiers applied per site.
 
 % This paper combines traditional learning methods with regularized multi-task learning  to account for the differences between site data while still assuming similarity between tasks.  The ABIDE dataset is used for this research where a third of the data are removed and used to select a variety of parameters which are then used within a leave-one-out SVM classifier for the remaining test subjects. \keywords{SVM classification, ABIDE, Autism, ASD, multi-task learning, multi-site data }
 \end{abstract}
@@ -178,35 +162,35 @@ Twelve subjects were removed because of failure during the preprocessing.  Two O
 \subsubsection{Data Extraction}
 From each subject's postprocessed image, the time series for each of 264 regions is extracted based on Power's regions of interest \cite{Powers}. These 264 regions are spread out among the cerebral cortex, subcortical structures and cerebellum, where each region is a sphere of 5mm in radius and regions are separated by a minimum distance of 10mm so as to avoid detection of a shared signal. The Fisher transformed Pearson correlation coefficient is then found between each region and all other 263 regions, resulting in a 34,716 dimensional feature space for each subject. After feature selection, this number was reduced to ****** regions of the original 264, yielding a final dimensionality of ***** features
 \subsection{Results}
-The ABIDE data was split into two sets; one half of the data was used for training, the other half was used exclusively to test our approach.  This divide was first done at the site level, a random division within ASD and controls, to preserve the ratios between sites and groups across the two data sets.
+The ABIDE data was split into two sets; one half of the data was used for training and the other half was used exclusively to test our approach.  This split was performed at the site level, randomly removing half of the ASD subjects and half of the TD subjects per site, and then aggregated into a testing set to preserve the ratios between sites and groups across the two data sets.
 
-We present results for three cases: one where each site was classified individually, a second where all site data was pooled and considered a single site and the third using the multi-task learning approach described in \ref{subsec:MTL}. For all of the results presented within, a radial basis function (RBF) kernel was used in the SVM, with parameters $C$ and $\gamma$ determined by cross validation on the training set. Multi-task learning requires an additional parameter, $\mu$, used to control similarity across tasks; this was also determined during cross validation. The training set was also used to determine nuisance factor regression on subject age, and feature selection for use on the testing set prior to the leave one out classifier.  ***All values determined by the training set were fixed across each experiment in order to test the difference between the classification cases, not the effectiveness of parameter tuning.
+We present results for three cases: one where each site was classified individually, a second where all site data was pooled and considered a single site and the third using the multi-task learning approach described in \ref{subsec:MTL}. For all of the results presented within, a linear kernel was used in the SVM, with the error term parameter, $C$,  determined by cross validation on the training set. Multi-task learning requires an additional parameter, $\mu$, which was also determined during cross validation on the training set. Additionally, the training set was used to determine nuisance factor regression on subject age, and feature selection as described in \ref{subsec:FS}. It is important to note that all parameter tuning, feature selection, nuisance factor regression was performed exclusively on the training set. Involving the testing set in any of these procedures can bias the classifier and inflate the results. 
 
 % If don't have time for CV with mu
 %For multi-task learning, the results are presented with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each task's individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}. 
 %This can be seen in figure ******, where a $mu$ value of ***** corresponds to single task learning and a $mu$ value of ****** corresponds to classifying each task individually.  The ******* indicate our results for single-task learning and the combined accuracy for individual task classification.
 %The ideal value for $\mu$ appears to be at ********, where the accuracy reaches a peak of ********.
 
-The multi-task learning approach is significantly better than the single task approach, which is in turn much better than the individual task approach. A caveat is that the sensitivity and specificity values for single task learning seem to be more stable***?? than in the multi-task result. 
+The multi-task learning approach achieved significantly better overall accuracy than the single task approach, which in turn is much better than the individual site approach. Using MTL, we classified the ABIDE data with an  overall accuracy of 66.3\%, with 68\% sensitivity and 64\% specificity.  Pooling all data resulted in 64.3\% overall accuracy, 68\% sensitivity and 60\% specificity. The summed overall accuracy of each Individual site was 58.1\% with sensitivity of 64\% and specificity of 53\%. 
 \begin{figure}
 	\centering
-	\includegraphics[scale = .6]{acc_bar.png}
+	\includegraphics[scale = .4]{acc_bar.png}
 	\caption{The overall accuracies by site, as found by each of the three experiments. }
 	\label{fig:acc_bar}
 \end{figure}
 
 
-Several datasets benefited greatly from the increase in data size, increasing **************.  For sites that were relatively stable to begin with because of sample size, the MTL approach did not find a large improvement to that sites overall accuracy.
+Several sites benefited greatly from the increase in data size, most notably OHSU, KKI and MaxMun.  For sites that were relatively stable to begin with because of large individual site sample size, the MTL approach found little to no improvement to that sites overall accuracy, see NYU, UCLA, UM, and USM. This is an expected **** of multi-task learning, as the larger sites have enough data to design a competent classifier.  By requiring these sites to be near the combined site mean, a decrease in accuracy is likely as the decision boundary is deviating from what was already a stable result. 
  
 \section{Discussion and Conclusion}
 \begin{figure}
 	\centering
-	\includegraphics[scale = .3]{now_circos.png}
-	\caption{The pairwise connections, represented as ribbons connecting each region, selected by the hypothesis test described in \ref{subsec:FS}.  The width of each ribbon is determined by the weights from the $w_0$ vector in the SVM. }
+	\includegraphics[scale = .15]{now_circos2.png}
+	\caption{The pairwise connections, represented as ribbons connecting each region, selected by the method described in \ref{subsec:FS}.  The width of each ribbon is determined by the weights from the $w_0$ vector used in the SVM. }
 	\label{fig:circos}
 \end{figure}
 
-Figure \ref{fig:circos} displays the regions identified via the method described \ref{subsec:FS}.  The regions show a strong overlap with ROIs previously identified as network “hubs” thought to be abnormal in autism, namely the default mode network and socioemotional salience network.  Atypical network structure and function, identified in structural covariance MRI \cite{zielinski2012scmri} and also functional connectivity studies (reviewed in \cite{jeff2014}), may contribute to many of the behaviors associated with the disorder.
+Figure \ref{fig:circos} displays the regions identified via the method described in  \ref{subsec:FS}.  The regions show a strong overlap with ROIs previously identified as network “hubs” thought to be abnormal in autism, namely the default mode network (regions LCGpf, RCGad, RPC, RAG, etc.)  and socioemotional salience network (regions RIC, L/RPcG, , etc.).  Specifically, these regions include  Atypical network structure and function, identified in structural covariance MRI \cite{zielinski2012scmri} and also functional connectivity studies (reviewed in \cite{jeff2014}), may contribute to many of the behaviors associated with the disorder.
 
 
 
