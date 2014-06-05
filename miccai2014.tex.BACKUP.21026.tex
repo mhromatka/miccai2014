@@ -204,7 +204,11 @@ We present results for three cases: one where each site was classified individua
 %This can be seen in figure ******, where a $mu$ value of ***** corresponds to single task learning and a $mu$ value of ****** corresponds to classifying each task individually.  The ******* indicate our results for single-task learning and the combined accuracy for individual task classification.
 %The ideal value for $\mu$ appears to be at ********, where the accuracy reaches a peak of ********.
 
+<<<<<<< HEAD
 The multi-task learning approach achieved significantly better overall accuracy than the single task approach, which in turn is much better than the individual site approach. Using MTL, we classified the ABIDE data with an  overall accuracy of 66.3\%, with 68\% sensitivity and 64\% specificity.  Pooling all data resulted in 64.3\% overall accuracy, 68\% sensitivity and 60\% specificity. The summed overall accuracy of each Individual site was 58.1\% with sensitivity of 64\% and specificity of 53\%. 
+=======
+The multi-task learning approach is significantly better than the single task approach, which is in turn much better than the individual task approach. A caveat is that the sensitivity and specificity values for single task learning seem to be more stable***?? than in the multi-task result.
+>>>>>>> 219ccd80d0efb24af99c5ddfb8460bc7d34e82bf
 \begin{figure}
 	\centering
 	\includegraphics[scale = .4]{acc_bar.png}
@@ -213,8 +217,13 @@ The multi-task learning approach achieved significantly better overall accuracy 
 \end{figure}
 
 
+<<<<<<< HEAD
 Several sites benefited greatly from the increase in data size, most notably OHSU, KKI and MaxMun.  For sites that were relatively stable to begin with because of large individual site sample size, the MTL approach found little to no improvement to that sites overall accuracy, see NYU, UCLA, UM, and USM. This is an expected **** of multi-task learning, as the larger sites have enough data to design a competent classifier.  By requiring these sites to be near the combined site mean, a decrease in accuracy is likely as the decision boundary is deviating from what was already a stable result. 
  
+=======
+Several datasets benefited greatly from the increase in data size, increasing **************.  For sites that were relatively stable to begin with because of sample size, the MTL approach did not find a large improvement to that sites overall accuracy.
+
+>>>>>>> 219ccd80d0efb24af99c5ddfb8460bc7d34e82bf
 \section{Discussion and Conclusion}
 \begin{figure}
 	\centering

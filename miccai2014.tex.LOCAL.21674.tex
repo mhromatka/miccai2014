@@ -2,7 +2,7 @@
 \usepackage{makeidx}
 \usepackage{cite}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb}
+\usepackage{amssymb}
 
 %
 
@@ -54,9 +54,9 @@ combine statistical tests of low-dimensional summary measures, it is less
 applicable to learning problems on high-dimensional data such as images. For
 instance, applying independent classifiers at each site and then combining them
 post-hoc misses the opportunity that the classifiers could benefit from sharing
-information across sites during learning.  Meta-analysis is also prone to publication bias, meaning only results from
-studies whose results were significant enough to publish are aggregated.  By using shared raw data instead of widely
-published results, this bias can ideally be avoided \cite{meta}.
+information across sites during learning.  Meta-analysis is also prone to publication bias, meaning only results from 
+studies whose results were significant enough to publish are aggregated.  By using shared raw data instead of widely 
+published results, this bias can ideally be avoided \cite{meta}. 
 
 In this paper, we propose an approach for combining multiple imaging studies in
 classification problems. The idea is to treat the problem as a multi-task
@@ -90,79 +90,46 @@ differences across imaging sites as noise instead of extra data that can be
 leveraged when classifying an aggregate data set.
 
 % Many researchers fail to take these differences as a****8, but rather as increased noise when treating with the drawback of increased noise due to scanner, protocol and population differences.}
-
+  
 %Previous efforts to combine single-site studies have relied primarily on meta-analysis, in which results across small sites are statistically combined to extract patterns common across the combined sample size. Meta-analysis, however, is not free of subjectivity of data variability, thus this method of combined analysis is also faulty \cite{meta}.
 
 \section{Methods}
-We formulate classification of multi-site imaging data as a multi-task learning
-problem, where each site, $s = 1, \ldots, S$, is treated as a separate
-task. This results in a different classifier for each site, which allows for
-variability of decision boundaries across sites. At the same, a regularization
-term in the objective function favors similarities between sites, resulting in
-sharing of data across sites during training. We specifically use a regularized
-version of SVM, introduced by Evgeniou and Pontil~\cite{regMTL}, which we
-describe next. Following that, we describe a process for feature selection in
-the case of resting state fMRI, which is an important step to reduce the high
-dimensionality of the data.
+Classification of multi-site imaging data can be thought of as a multi-task learning problem where each site,  $s$, is treated as a separate task, $t$.  For a dataset with $S$ sites, the corresponding multi-task problem will have a set of $T = S$ tasks and a function $F(t)$ that describes the relationship between each task.
+Prior to using any sort of machine learning, however, nuisance factors (e.g. age) should be ***removed? from the data to ideally isolate differences across all data that are exclusive to the ***disease, disorder?**** being studied.
 
 % SVM parameters through cross-validation and the features to be used in classification (see \ref{subsec:FS}).  These parameters are then used in a leave-one-out classifier on the testing data to determine the algorithm's accuracy, sensitivity and specificity. It is important to note that all parameter tuning and feature selection is done exclusively on the \textit{training} set, and the testing set is only used in the final classification to avoid inflation of results.
 
 \subsection{Multi-Task Learning}
 \label{subsec:MTL}
-Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning
-based on kernel methods typically used for single task learning.  This method
-relies on minimizing regularization functions, such as that for SVM, to capture
-both overall similarity between tasks and individual task differences. Given $N$
-feature vectors $x_i \in \mathbb{R}^d$ with labels $y_i \in \{-1, 1\}$, the
-traditional minimization for a soft margin SVM~\cite{svm} is
+Evgeniou and Pontil~\cite{regMTL} introduce a method of multi-task learning based on kernel methods typically used for single task learning.  This method relies on minimizing regularization functions, such as that for SVM, to capture both overall similarity between tasks and individual task differences.  The traditional minimization for a soft margin SVM is
 \begin{equation}
 \label{eq:svm}
-\arg \min_{w} \frac{1}{2}\|w\|^2 + C \sum_{i=1}^N \xi_i,
-\quad\quad \text{subject to:}\,\,\, y_i (w \cdot x_i - b) \geq 1 - \xi_i,\,\xi_i
-\geq 0,
+\frac{1}{2}w^2 + C F\left(\sum_{i=1}^t \xi_i\right),
 \end{equation}
-where the weight vector $w$ defines the hyperplane, $(w \cdot x +b)$,
-which is the boundary between groups, $C \in \mathbb{R}$ is a constant, and $\xi_i
-\in \mathbb{R}$ are slack variables.
+where $C$ is a constant and $F$ is a monotonic convex function with $F(0)=0$ \cite{svm}. In the case of SVMs, the weight vector $w$ is used to define the hyperplane, $(w \cdot x +b)$,  which is the boundary between groups.
 
-For multi-task learning, the relationship between $S$ tasks (or sites, in our
-case) must be described, which can be framed as a hierarchical model. This
-assumes that each task function comes from a class of probability distributions.
-The relationship is defined as
+For multi-task learning, the relationship between $T$ tasks must be described, which can be framed as a hierarchical model. This assumes that each task function comes from a class of probability distributions.  The relationship is defined as\\
 \begin{equation}
 \label{eq:sim}
- w_s = w_0 + v_s ,
+ w_t = w_0 + v_t ,
 \end{equation}
-where $w_0$ is the mean of the data, and each task $s$ has its own weight
-vector, $v_s$. Multi-task learning allows for simultaneous learning of the mean
-of all tasks, $w_0$, and each task weight vector, $v_s$, so the minimization
-function then becomes
+where $w_0$ is the mean of the data and each task $t$ has its own weight vector, $v_t$. Multi-task learning allows for simultaneous learning of the mean of all tasks, $w_0$, and each task weight vector, $v_t$, so the minimization function then becomes\\
 \begin{equation}
 \label{eq:mtlsvm}
- C \sum_{s=1}^S \sum_{i=1}^m \xi_{is} + \frac{\lambda_1}{S} \sum_{s=1}^S ||v_s||^2 + \lambda_2||w_0||^2 ,
+ C \sum_{t=1}^T \sum_{i=1}^m \xi_{it} + \frac{\lambda_1}{T} \sum_{t=1}^T ||v_t||^2 + \lambda_2||w_0||^2 ,
 \end{equation}
-where $\lambda_1, \lambda_2$ are positive regularization parameters, and $C$ is
-still a constant. For high similarity between tasks, the $v_s$ will be small in
-relation to $w_0$; this relationship is described by the hyperparameters
-$\lambda_1, \lambda_2$ that must be chosen by the user.
+where $\lambda_1, \lambda_2$ are positive regularization parameters, and $C$ is still a constant. For high similarity between tasks, the $v_t$ will be small in relation to $w_0$; this relationship is described by the hyperparameters $\lambda_1, \lambda_2$ that must be chosen by the user.
 
-The dual of \eqref{eq:mtlsvm} can be described using a feature mapping
-$\phi((x,s)),$ which allows us to relate the dual of a multi-task learning
-problem to the dual of \eqref{eq:svm} as
+The dual of equation \ref{eq:mtlsvm} can be found by defining a set of functions $f_t(x) = w_t \cdot x$ which can be simplified to $F(x,t) = f_t(x)$.  This can be described by a kernel function $\phi((x,t))$ which allows us to relate the dual of a multi-task learning problem to the dual of Equation \ref{eq:svm}.
 \begin{equation}
 \label{eq:mtldual}
-\max_{\alpha_{is}}  \left\{ \sum_{i=1}^m\sum_{s=1}^S \alpha_{is} -  \sum_{i=1}^m\sum_{s=1}^S\sum_{j=1}^m\sum_{t=1}^S  \alpha_{is}y_{is}\alpha_{jt}y_{jt}\phi((x,t))      \right\},
+\max_{\alpha_{it}}  \left\{ \sum_{i=1}^m\sum_{t=1}^T \alpha_{it} -  \sum_{i=1}^m\sum_{s=1}^T\sum_{j=1}^m\sum_{t=1}^T  \alpha_{is}y_{is}\alpha_{jt}y_{jt}\phi((x,t))      \right\}
 \end{equation}
 where
 \begin{equation}
-\phi((x,s)) = \Big(\frac{x}{\sqrt{\mu}}, \underbrace{0,...,0}_{s-1}, x,
-\underbrace{0,...,0}_{S-s} \Big), \quad \text{for  } \mu = \frac{S \lambda_2}{\lambda_1} .
+\phi((x,t)) = \big(\frac{x}{\sqrt{\mu}}, \underbrace{0,...,0}_{t-1}, x, \underbrace{0,...,0}_{T-t} \big), \quad \textbf{for  } \mu = \frac{T\lambda_2}{\lambda_1} .
 \end{equation}
-As can be seen in \eqref{eq:mtldual}, this is the same dual problem as for a
-single-task SVM, with the data transformed by $\phi((x,s))$ into the multi-task
-feature space. This can be implemented as a kernel method, without explicitly
-computing the higher-dimensional feature vectors $\phi((x,s))$, since only inner
-products between features are needed in the SVM optimization.
+As you can see in Equation \ref{eq:mtldual}, this is the same dual problem as for a single task-SVM, with the data transformed by $\phi((x,t))$ into the multi-task kernel space.
 
 
 
@@ -172,7 +139,7 @@ products between features are needed in the SVM optimization.
 Data extraction in imaging studies typically leads to very high dimensional data spaces.  For f-MRI, a typical choice for data is the pairwise correlation between $n$ predefined regions of the brain.  This yields a dataspace of $\frac{n(n+1)}{2}$ dimensionality, which, even for a relatively small number of regions, can be  computationally expensive.  The multi-task learning above further increases dimensionality with the number of tasks. For a feature space $x \in \mathbb{R}^d$, the multi-task kernel $\phi((x,t))$ would yield a feature space of $d(t+1)$ dimensions.  Feature selection can and should be employed to remove redundancy and increase relevancy of the data while reducing computation time \cite{featsel}.
 
 
-One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, meaning that the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in \cite{guyon2002gene}, \cite{abide}, \cite{ecker2010}: an iterative process where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set after each iteration. We modify SVM-RFE to better suit the f-MRI pairwise correlation data by ranking the features not by the associated $w$ value of each pairwise correlation, but by the $l2$-norm of an entire region's pairwise correlation $w$ vector values. This means for each region, $r$, we extract the $w$ values for all pairwise correlation datapoints involving region $r$ and find the $l2$-norm of these $w$ values. This is done for all regions in the dataset which are then ranked and a user-specifed number of regions corresponding to the lowest associated $l2$-norms are removed from the dataset after each iteration.   This approach effectively reduces the data dimension for feature selection purposes while still leveraging the correlation data.
+One approach is to use the values of the weight vector $w$ to choose the most relevant features.  Recall that the decision boundary in an SVM is defined by $w \cdot x$, meaning that the highest magnitudes in the weight vector denote the features that best define the decision boundary between groups. This is the basis for the SVM recursive feature elimination(SVM-RFE) method demonstrated in \cite{guyon2002gene}, \cite{abide}, \cite{ecker2010}: an iterative process where a user-specified number of features corresponding to the lowest $w$ values are removed from the feature set after each iteration. We modify SVM-RFE to better suit the f-MRI pairwise correlation data by ranking the features not by the associated $w$ value of each pairwise correlation, but by the $l2$-norm of an entire region's pairwise correlation $w$ vector values. This means for each region, $r$, we extract the $w$ values for all pairwise correlation datapoints involving region $r$ and find the $l2$-norm of these $w$ values. This is done for all regions in the dataset which are then ranked and a user-specifed number of regions corresponding to the lowest associated $l2$-norms are removed from the dataset after each iteration.   This approach effectively reduces the data dimension for feature selection purposes while still leveraging the correlation data.  
 %The iteration with the highest overall accuracy on the training set is used to determine which regions should be removed from both the training and testing sets in the classifier.
 
 %A ****** approach is to use a simple hypothesis test to determine which features would be most useful in classification.  Nuisance factors, such as age or ******, should be accounted for prior to the hypothesis test to ideally isolate differences attributed to the disease or disorder being studied.  A linear model is then fit to the training set one feature at a time based on group.  If the coefficient for the group  has a $p < .001$, the feature is kept and used in the SVM classification. This test is done on each feature in turn, ultimately reducing the data into a set that has significant differences between groups.
@@ -180,7 +147,7 @@ One approach is to use the values of the weight vector $w$ to choose the most re
 \subsection{Data}
 The Autism Brain Imaging Data Exchange(ABIDE) database is an online consortium of resting-state functional-MRI data from 17 international sites, resulting in brain imaging data for 539 individuals with ASD and 573 typically developing(TD)  controls \cite{abide}. All ASD subjects were diagnosed by either the Autism Diagnosis Observation Schedule-General(ADOS-G) or the Autism Diagnostic Interview-Revised tests and removed from the study if other co-morbid disorders were present \cite{lordADOS} \cite{lordADIR} \cite{abide}.  Further inclusion details can be found at (put url? citation to... website? or the abide paper?)
 \subsubsection{Preprocessing}
-All data was preprocessed using the Functional Connectomes-1000 preprocessing scripts which includes skull stripping, motion correcting, registration, segmentation and spatial smoothing \cite{fcon}.
+All data was preprocessed using the Functional Connectomes-1000 preprocessing scripts which includes skull stripping, motion correcting, registration, segmentation and spatial smoothing \cite{fcon}. 
 %\begin{enumerate}
 %\item MRI Deoblique, reorient, skull strip
 %\item f-MRI Reorient, motion correct, skull strip, smooth
@@ -200,7 +167,7 @@ The ABIDE data was split into two sets; one half of the data was used for traini
 We present results for three cases: one where each site was classified individually, a second where all site data was pooled and considered a single site and the third using the multi-task learning approach described in \ref{subsec:MTL}. For all of the results presented within, a linear kernel was used in the SVM, with the error term parameter, $C$,  determined by cross validation on the training set. Multi-task learning requires an additional parameter, $\mu$, which was also determined during cross validation on the training set. Additionally, the training set was used to determine nuisance factor regression on subject age, and feature selection as described in \ref{subsec:FS}. It is important to note that all parameter tuning, feature selection, nuisance factor regression was performed exclusively on the training set. Involving the testing set in any of these procedures can bias the classifier and inflate the results. 
 
 % If don't have time for CV with mu
-%For multi-task learning, the results are presented with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each task's individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}.
+%For multi-task learning, the results are presented with varying values of $\mu$.  Recall that $\mu$ is defined as $\frac{T\lambda_2}{\lambda_1}$, which is used to compute the mean across all tasks, $w_0$, in the formulation of $\phi((x,t))$. For very small values of $\mu$, the $w_0$ term becomes very large in relation to each task's individualized weight vector, $v_t$, so the problem essentially becomes a single-task learning problem.  The converse, where $\mu$ is very large, approaches the scenario where the tasks are completely unrelated \cite{regMTL}. 
 %This can be seen in figure ******, where a $mu$ value of ***** corresponds to single task learning and a $mu$ value of ****** corresponds to classifying each task individually.  The ******* indicate our results for single-task learning and the combined accuracy for individual task classification.
 %The ideal value for $\mu$ appears to be at ********, where the accuracy reaches a peak of ********.
 
