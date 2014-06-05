@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  5 JUN 2014 16:45
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  5 JUN 2014 17:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -356,7 +356,7 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [6 <./acc_bar.png (PNG copy)>] [7 <./now_circos3.png>] (./miccai2014.bbl
+ [6 <./acc_bar.png (PNG copy)>] (./miccai2014.bbl [7 <./now_circos3.png>]
 Missing character: There is no ‚ in font cmr9!
 Missing character: There is no Ä in font cmr9!
 Missing character: There is no î in font cmr9!
@@ -366,7 +366,7 @@ Missing character: There is no ô in font cmr9!
 Missing character: There is no ‚ in font cmr9!
 Missing character: There is no Ä in font cmr9!
 Missing character: There is no ô in font cmr9!
- [8]) [9]
+) [8]
 (./miccai2014.aux) ) 
 Here is how much of TeX's memory you used:
  2911 strings out of 493607
@@ -375,7 +375,7 @@ Here is how much of TeX's memory you used:
  6170 multiletter control sequences out of 15000+200000
  10612 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,8n,24p,1374b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,24p,1374b,265s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/
 fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/a
@@ -389,10 +389,10 @@ fonts/cm/cmr9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fon
 ts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/amsf
 onts/symbols/msbm10.pfb>
-Output written on miccai2014.pdf (9 pages, 409551 bytes).
+Output written on miccai2014.pdf (8 pages, 409350 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
