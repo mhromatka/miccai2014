@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  6 JUN 2014 11:19
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/TeX Live for SUSE Linux) (format=pdflatex 2013.8.19)  6 JUN 2014 14:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -362,33 +362,30 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 <acc_bar.png, id=28, 816.04875pt x 608.2725pt>
 File: acc_bar.png Graphic file (type png)
  <use acc_bar.png>
-Package pdftex.def Info: acc_bar.png used on input line 243.
+Package pdftex.def Info: acc_bar.png used on input line 251.
 (pdftex.def)             Requested size: 326.41371pt x 243.30469pt.
  [5]
 <now_circos3.png, id=32, 2007.5pt x 2007.5pt>
 File: now_circos3.png Graphic file (type png)
  <use now_circos3.png>
-Package pdftex.def Info: now_circos3.png used on input line 266.
+Package pdftex.def Info: now_circos3.png used on input line 274.
 (pdftex.def)             Requested size: 220.82568pt x 220.82568pt.
 
-Overfull \hbox (12.54945pt too wide) in paragraph at lines 266--267
+Overfull \hbox (12.54945pt too wide) in paragraph at lines 274--275
  [][] 
  []
 
 
-Overfull \hbox (12.54643pt too wide) in paragraph at lines 275--327
+Overfull \hbox (8.57411pt too wide) in paragraph at lines 283--332
  [][] 
  []
 
 
-Overfull \hbox (2.05553pt too wide) in paragraph at lines 262--331
+Overfull \hbox (2.05553pt too wide) in paragraph at lines 270--336
 [][] [] 
  []
 
-
-Underfull \vbox (badness 1946) has occurred while \output is active []
-
- [6 <./acc_bar.png (PNG copy)>] (./miccai2014.bbl [7 <./now_circos3.png>]
+[6 <./acc_bar.png (PNG copy)>] (./miccai2014.bbl [7 <./now_circos3.png>]
 Missing character: There is no â in font cmr9!
 Missing character: There is no € in font cmr9!
 Missing character: There is no ” in font cmr9!
@@ -398,8 +395,8 @@ Missing character: There is no ™ in font cmr9!
 Missing character: There is no â in font cmr9!
 Missing character: There is no € in font cmr9!
 Missing character: There is no ™ in font cmr9!
-) [8]
-(./miccai2014.aux) ) 
+)
+[8] (./miccai2014.aux) ) 
 Here is how much of TeX's memory you used:
  3073 strings out of 493607
  38755 string characters out of 3149945
@@ -408,21 +405,21 @@ Here is how much of TeX's memory you used:
  10612 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,9n,24p,1191b,285s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf/
-fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/public/a
-msfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/public/
-amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pf
-b></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf/f
-onts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public/ams
-fonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb></u
-sr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/font
-s/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/amsfo
-nts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb>
-Output written on miccai2014.pdf (8 pages, 500585 bytes).
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10
+.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
+xmf/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/t
+exmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/pub
+lic/amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/tex
+mf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public
+/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb
+></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/a
+msfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb>
+Output written on miccai2014.pdf (8 pages, 500696 bytes).
 PDF statistics:
  102 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
